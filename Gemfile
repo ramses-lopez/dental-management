@@ -11,6 +11,8 @@ gem 'bootstrap-will_paginate'
 
 gem 'bootstrap-sass', '~>2.3.2.0'
 
+gem "bootstrap-datepicker-rails", "~> 1.1.0.1"
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 
