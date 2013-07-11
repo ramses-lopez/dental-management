@@ -1,5 +1,7 @@
 DentoSpa::Application.routes.draw do
   get "home/index"
+  get "home/report1"
+  get "home/report2"
 
   root "home#index"
 
@@ -51,3 +53,4 @@ DentoSpa::Application.routes.draw do
   #     resources :products
   #   end
 end
+
