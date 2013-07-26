@@ -1,11 +1,14 @@
-<div class="navbar">
-  <div class="navbar-inner">
-    <a class="brand" href="#">LOGO</a>
-    <ul class="nav">
-      <li class='nav-link'><%= link_to 'Nueva Actividad', home_index_path%></li>
-      <li class='nav-link'><%= link_to 'Reporte por médico', home_report1_path%></li>
-      <li class='nav-link'><%= link_to 'Reporte Total', home_report2_path%></li>
-    </ul>
-  </div>
+<div class='header row'>
+	<div class='span3'>
+		<a class="brand" href="#">
+			<%= image_tag 'logodentoa1.png'%>
+		</a>
+	</div>
+	<div class='offset4'>
+		<ul class="nav nav-pills">
+		  <li class='nav-link pull-right'><%= link_to 'Nueva Actividad', home_index_path%></li>
+		  <li class='nav-link pull-right'><%= link_to 'Reporte por Odontólogo', home_report1_path%></li>
+		  <li class='nav-link pull-right'><%= link_to 'Reporte Total', home_report2_path%></li>
+		</ul>
+	</div>
 </div>
-<hr>

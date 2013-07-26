@@ -1,14 +1,46 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$headingsColor: #1f4c78;
+$textColor: #444444;
 @import "bootstrap";
 
 body
 {
-	background-color: #eeeeee
+	background-image: image_url('blue-gradient.png');
+	background-repeat: repeat-x;
+	background-color: #3377bb;
 }
 
 .navbar
 {
 	margin: 10px 0px
+}
+
+.header
+{
+	font-size: 125%;
+
+	ul
+	{
+		margin: 20px 0px;
+	}
+
+}
+
+.content
+{
+	@include border-radius(5px);
+	margin: 10px 0px;
+	padding: 10px 10px;
+	background-color: #ffffff;
+}
+
+.highlight
+{
+	@include border-radius(5px);
+	padding: 10px;
+	margin: 10px 0px;
+	background-color: #eeeeee;
 }
