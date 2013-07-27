@@ -23,7 +23,15 @@
 		<p><b>Esta Mes:</b> Bs. 6400</p>
 	</div>
 </div>
-<h4>Detalle de actividades</h4>
+<div class='row'>
+	<div class='span5'>
+		<h4>Detalle de actividades</h4>
+	</div>
+	<div class='span6 text-right'>
+		<%= select_tag :especialidad, options_for_select(['Clínica', 'Radiología']) %>
+	</div>
+
+</div>
 <table class='table table-stripped'>
 	<tr>
 		<th>Paciente</th>
