@@ -11,12 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005143753) do
+ActiveRecord::Schema.define(version: 20131005182243) do
+
+  create_table "invoice_items", force: true do |t|
+    t.integer  "invoice_id",                                           null: false
+    t.integer  "item_id",                                              null: false
+    t.integer  "quantity",                                 default: 1, null: false
+    t.decimal  "item_price",      precision: 15, scale: 2
+    t.string   "batch_number"
+    t.date     "expiration_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoices", force: true do |t|
+    t.integer  "provider_id"
+    t.string   "number"
+    t.date     "date"
+    t.decimal  "total",       precision: 15, scale: 2, default: 0.0
+    t.decimal  "tax",         precision: 15, scale: 2, default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "items", force: true do |t|
     t.string   "label",                  null: false
     t.integer  "stock",      default: 0, null: false
     t.integer  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "providers", force: true do |t|
+    t.string   "label"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "website"
+    t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

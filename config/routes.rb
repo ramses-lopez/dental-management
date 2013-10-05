@@ -1,4 +1,8 @@
 DentoSpa::Application.routes.draw do
+  resources :invoices
+
+  resources :providers
+
   resources :items
 
   get "home/index"
