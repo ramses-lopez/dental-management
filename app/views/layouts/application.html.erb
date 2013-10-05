@@ -7,6 +7,10 @@
 		<%= csrf_meta_tags %>
 	</head>
 	<body class='container'>
+		<% if Rails.env == 'development' %>
+			<% deadline = Date.new(2013,10,28)%>
+			<h4 style="color: white; text-align: center">Entrega el: <%= "#{deadline} (#{(deadline - Date.today).to_i} días)" %></h4>
+		<% end %>
 		<div class='content'>
 			<%= render 'layouts/header'%>
 			<% flash.each do |key, value| %>
@@ -18,8 +22,6 @@
 		<% if Rails.env == 'development' %>
 			<%= debug(session.to_hash) %>
 			<%= debug(params) %>
-			<% deadline = Date.new(2013,10,28)%>
-			<h4 style="color: white; text-align: center">Entrega el: <%= "#{deadline} (#{(deadline - Date.today).to_i} días)" %></h4>
 		<% end %>
 	</body>
 </html>

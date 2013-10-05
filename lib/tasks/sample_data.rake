@@ -42,4 +42,8 @@ def create_providers
 	end
 end
 
+def create_invoices
+
+end
+
 

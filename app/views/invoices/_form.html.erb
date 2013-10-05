@@ -1,0 +1,40 @@
+<%= form_for(@invoice) do |f| %>
+
+	<%= render 'shared/error_messages', object: @invoice %>
+
+	<div class='row'>
+		<div class='span3'>
+			<%= f.label :provider_id %>
+			<%= f.select :provider_id, options_for_select(Provider.all.map {|p| [p.label, p.id]}), class: 'span3' %>
+		</div>
+		<div class='span3'>
+			<%= f.label :number %>
+			<%= f.text_field :number, class: 'datepicker span3'%>
+		</div>
+		<div class='span3'>
+			<%= f.label :date %>
+			<%= f.text_field :date, class: 'datepicker span3'%>
+		</div>
+	</div>
+	<fieldset>
+		<legend>Detalle</legend>
+
+
+	</fieldset>
+
+	<div class='row'>
+		<div class='span4'>
+			<%= f.label :tax %>
+			<%= f.text_field :tax, class: 'span4' %>
+		</div>
+		<div class='span4'>
+			<%= f.label :total %>
+			<%= f.text_field :total, class: 'span4' %>
+		</div>
+	</div>
+
+
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+<% end %>

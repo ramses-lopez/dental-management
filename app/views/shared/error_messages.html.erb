@@ -1,0 +1,10 @@
+<% if object.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= I18n.t('activerecord.errors.template.header', model: object.class.model_name.human, count: object.errors.full_messages.count) %></h2>
+		<ul>
+			<% object.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
