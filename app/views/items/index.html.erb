@@ -1,0 +1,29 @@
+<h1>Productos en inventario</h1>
+
+<table class='table table-condensed table-hover'>
+  <thead>
+    <tr>
+      <th>Descripción</th>
+      <th>Existencia</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.label %></td>
+        <td><%= item.stock %></td>
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Producto', new_item_path, class: 'btn' %>

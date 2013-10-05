@@ -1,0 +1,74 @@
+<h2>Resúmen de Consulta</h2>
+
+<div class='row highlight'>
+	<div class='span5'>
+		<p><b>Paciente: </b>Pedro Pérez</p>
+		<p><b>Cédula: </b>15.123.654</p>
+		<p><b>Paciente desde: </b>25/08/2009</p>
+		<p><b>Última visita : </b>03/04/2012</p>
+	</div>
+	<div class='span5'>
+		<address>
+		  <strong>Dirección</strong><br>
+			Av. Luis Roche<br>
+			Res. Altamira<br>
+			Caracas, Venezuela<br>
+		  <abbr title="Teléfono">T:</abbr> (212) 555-7890
+		</address>
+	</div>
+</div>
+
+<%= label_tag :medic, 'Nombre del Odontólogo'%>
+<%= select_tag :medic, options_for_select(['Odontólogo 1', 'Odontólogo 2', 'Odontólogo 3'])%>
+
+<div class='row'>
+	<div class='span6'>
+		<h5>Actividades realizadas (<%=Time.now.to_formatted_s(:short_date)%>)</h5>
+	</div>
+	<div class='span6 form-inline'>
+		<%= label_tag :activity, 'Agregar Actividad: '%>
+		<%= select_tag :activity, options_for_select(['Corrección de Caries', 'Colocación de Resinas', 'Implante', 'Ortodoncia', 'Profilaxis'])%>
+		<button type="button" class="btn btn-primary">
+	  		<i class="icon-plus icon-white"></i>
+		</button>
+	</div>
+</div>
+<table class='table table-stripped'>
+	<tr>
+		<th>Actividad</th>
+		<th>Cantidad</th>
+		<th>Precio Unitario</th>
+		<th>Precio Total</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td>Corrección de Caries</td>
+		<td>4</td>
+		<td>BsF. 200</td>
+		<td>BsF. 800</td>
+		<td><i class='icon-remove'></i></td>
+	</tr>
+	<tr>
+		<td>Colocación de Resinas</td>
+		<td>3</td>
+		<td>BsF. 200</td>
+		<td>BsF. 600</td>
+		<td><i class='icon-remove'></i></td>
+	</tr>
+	<tr>
+		<td>Implante</td>
+		<td>1</td>
+		<td>BsF. 5000</td>
+		<td>BsF. 5000</td>
+		<td><i class='icon-remove'></i></td>
+	</tr>
+</table>
+<div class='lead text-right'>
+	<b>Total: </b> BsF. 6400
+</div>
+<div class='text-center'>
+	<button type="button" class="btn btn-success btn-large">
+		<i class="icon-ok icon-white"></i> Guardar Cambios
+	</button>
+</div>
+
