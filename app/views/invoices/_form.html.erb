@@ -18,8 +18,14 @@
 	</div>
 	<fieldset>
 		<legend>Detalle</legend>
-
-
+		<% f.fields_for :invoice_items do |builder| %>
+			<%= builder.text_field :invoice_id %>
+			<%= builder.text_field :item_id %>
+			<%= builder.text_field :quantity %>
+			<%= builder.text_field :item_price %>
+			<%= builder.text_field :batch_number %>
+			<%= builder.text_field :expiration_date %>
+		<% end %>
 	</fieldset>
 
 	<div class='row'>
