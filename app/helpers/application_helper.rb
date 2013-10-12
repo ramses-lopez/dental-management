@@ -11,12 +11,22 @@ module ApplicationHelper
 
 	def link_to_add_fields(name, f, association)
 		id, fields = add_fields name, f, association
-		link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+		link_to(name, '#', class: "add_fields", data: {container: "##{association.to_s}_container" , id: id, fields: fields.gsub("\n", "")})
 	end
 
 	def select_to_add_fields(name, f, association, options)
 		id, fields = add_fields name, f, association
 		select_tag name, options, class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")}
+	end
+
+	def get_grouped_options(item_collection)
+		hsh = {}
+		item_collection.map do |i|
+			key = i.label[0].to_sym
+			hsh[key] = [] if hsh[key].nil?
+			hsh[key] << [i.label, i.id]
+		end
+		hsh
 	end
 
 	private

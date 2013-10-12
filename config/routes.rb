@@ -1,13 +1,10 @@
 DentoSpa::Application.routes.draw do
   resources :invoices
-
   resources :providers
-
   resources :items
+  resources :invoice_items
 
   get "home/index"
-  get "home/report1"
-  get "home/report2"
 
   root "home#index"
 

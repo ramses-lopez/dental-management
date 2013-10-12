@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(version: 20131005182243) do
 
   create_table "invoice_items", force: true do |t|
-    t.integer  "invoice_id",                                           null: false
-    t.integer  "item_id",                                              null: false
-    t.integer  "quantity",                                 default: 1, null: false
-    t.decimal  "item_price",      precision: 15, scale: 2
+    t.integer  "invoice_id",                                             null: false
+    t.integer  "item_id",                                                null: false
+    t.integer  "quantity",                                 default: 1,   null: false
+    t.decimal  "item_price",      precision: 15, scale: 2, default: 0.0
     t.string   "batch_number"
     t.date     "expiration_date"
     t.datetime "created_at"
@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 20131005182243) do
   end
 
   create_table "invoices", force: true do |t|
-    t.integer  "provider_id"
-    t.string   "number"
-    t.date     "date"
+    t.integer  "provider_id",                                                 null: false
+    t.string   "number",                                                      null: false
+    t.date     "date",                                 default: '2013-10-12', null: false
     t.decimal  "total",       precision: 15, scale: 2, default: 0.0
     t.decimal  "tax",         precision: 15, scale: 2, default: 0.0
     t.datetime "created_at"

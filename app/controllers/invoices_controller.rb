@@ -16,7 +16,7 @@ class InvoicesController < ApplicationController
 	def new
 		@invoice = Invoice.new
 
-		3.times do
+		1.times do
 			@invoice.invoice_items << InvoiceItem.new
 		end
 
@@ -30,7 +30,6 @@ class InvoicesController < ApplicationController
 	# POST /invoices.json
 	def create
 		@invoice = Invoice.new(invoice_params)
-
 		respond_to do |format|
 			if @invoice.save
 				format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
@@ -74,6 +73,7 @@ class InvoicesController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def invoice_params
-		params[:invoice]
+		params.require(:invoice).permit(:provider_id, :number, :date, :tax, :total,
+			invoice_items_attributes: [:item_id, :quantity, :item_price, :batch_number, :expiration_date])
 	end
 end

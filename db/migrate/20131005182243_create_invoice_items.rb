@@ -4,7 +4,7 @@ class CreateInvoiceItems < ActiveRecord::Migration
 		t.integer :invoice_id, null: false
 		t.integer :item_id, null: false
 		t.integer :quantity, null: false, default: 1
-		t.decimal :item_price, precision: 15, scale: 2
+		t.decimal :item_price, precision: 15, scale: 2, default: 0
 		t.string :batch_number
 		t.date :expiration_date
 
