@@ -1,0 +1,8 @@
+<tr>
+	<td><%= f.select :item_id, grouped_options_for_select(get_grouped_options(Item.ordered)), {prompt: true}, class: 'span4' %></td>
+	<td><%= f.text_field :quantity, class: 'span1' %></td>
+	<td><%= f.text_field :item_price, class: 'span2' %></td>
+	<td><%= f.text_field :batch_number, class: 'span2' %></td>
+	<td><%= f.text_field :expiration_date, class: 'span2 datepicker' %></td>
+	<td><%= button_tag :_delete_item, class: 'btn' %></td>
+</tr>

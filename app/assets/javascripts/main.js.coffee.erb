@@ -1,0 +1,54 @@
+# Debido al funcionamiento de turbolinks (https://github.com/rails/turbolinks/blob/master/README.md),
+# los bindings a eventos deben hacerse de forma diferente:
+#	ready = ->
+#	  $('.edit_task input[type=checkbox]').click ->
+#	    $(this).parent('form').submit()
+#
+#	$(document).ready(ready)
+#	$(document).on('page:load', ready)
+#
+# De este modo, lo que esté contenido en la funcion 'ready' se va a llamar en cada cambio de pagina
+#
+# Aunque con este método, no es necesario ponerlos en el 'ready', asi es posible colocar metodos especificos para los views en js separados
+# $('document').on 'click', '.edit_task input[type=checkbox]', ->
+#    $(this).parent('form').submit()
+#
+# the method to this madness: http://railscasts.com/episodes/390-turbolinks?view=asciicast
+
+#ejecuta metodos para estilos
+initStyles = ->
+	now = new Date
+	dateFormat = 'dd/mm/yyyy'
+
+	birthpickerOptions =
+		autoclose: true
+		format: dateFormat
+		language: '<%= I18n.locale %>'
+		startDate: new Date now.getFullYear() - 100, now.getMonth(), now.getDate()
+		endDate: now
+
+	datepickerOptions =
+		autoclose: true
+		format: dateFormat
+		language: '<%= I18n.locale %>'
+
+	$('.birthpicker').datepicker(birthpickerOptions)
+	$('.datepicker').datepicker(datepickerOptions)
+	$('input[title],select[title],textarea[title]').tooltip()
+	$('input[type=submit], input[type=button]').addClass('btn btn-success')
+
+#elementos que deben estar ocultos al cargar la pagina
+hideElementsOnLoad = ->
+	#form natural person
+	$('#fieldset_fatca').hide()
+
+#colocar dentro de esta funcion todo lo que se desea cargar en el document.ready
+ready = ->
+	initStyles()
+	hideElementsOnLoad()
+
+#las llamadas al ready
+$(document).ready (ready)
+$(document).on('page:load', ready)
+
+
