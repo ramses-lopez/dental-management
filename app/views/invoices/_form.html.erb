@@ -3,8 +3,9 @@
 	<div class='row'>
 		<div class='span3'>
 			<%= f.label :provider_id %>
-			<%= f.select :provider_id, options_for_select(Provider.all.map {|p| [p.label, p.id]}, :provider_id), class: 'span3' %>
+			<%= f.select :provider_id, options_for_select(Provider.all.map {|p| [p.label, p.id]}, @invoice.provider_id), class: 'span3' %>
 		</div>
+
 		<div class='span3'>
 			<%= f.label :number %>
 			<%= f.text_field :number, class: 'span3'%>
@@ -15,24 +16,23 @@
 		</div>
 	</div>
 
-	<fieldset id='fieldset_invoice_items'>
-		<table class='table table-condensed' id='invoice_items_container'>
-			<tr>
-				<th><%= :item_id %></th>
-				<th><%= :quantity %></th>
-				<th><%= :item_price %></th>
-				<th><%= :batch_number %></th>
-				<th><%= :expiration_date %></th>
-				<th></th>
-			</tr>
-			<%= f.fields_for :invoice_items do |builder| %>
-				<tr><%= render 'invoice_items/fields', :f => builder%></tr>
-			<% end %>
-			<tr>
-				<%= link_to_add_fields :add_invoice_items, f, :invoice_items %>
-			</tr>
-		</table>
-	</fieldset>
+	<table class='table table-condensed' id='invoice_items_container'>
+		<caption>Detalle de factura</caption>
+		<tr>
+			<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:quantity) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
+		</tr>
+		<%= f.fields_for :invoice_items do |builder| %>
+			<%= render 'invoice_items/fields', :f => builder%>
+		<% end %>
+		<tr>
+			<td><%= link_to_add_fields :add_invoice_items, f, :invoice_items %></td>
+		</tr>
+	</table>
+
 	<div class='row'>
 		<div class='span4'>
 			<%= f.label :tax %>

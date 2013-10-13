@@ -221,7 +221,7 @@ es:
         quantity: Cantidad
         item_price: Precio/Unidad
         batch_number: Lote
-        expiration_date: Fecha de Vencimiento
+        expiration_date: Fecha Vencimiento
       item:
         label: Descripción
         stock: Existencia

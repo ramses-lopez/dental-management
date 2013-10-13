@@ -44,6 +44,7 @@ class InvoicesController < ApplicationController
 	# PATCH/PUT /invoices/1
 	# PATCH/PUT /invoices/1.json
 	def update
+		debugger
 		respond_to do |format|
 			if @invoice.update(invoice_params)
 				format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -74,6 +75,6 @@ class InvoicesController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def invoice_params
 		params.require(:invoice).permit(:provider_id, :number, :date, :tax, :total,
-			invoice_items_attributes: [:item_id, :quantity, :item_price, :batch_number, :expiration_date])
+			invoice_items_attributes: [:id, :item_id, :quantity, :item_price, :batch_number, :expiration_date])
 	end
 end

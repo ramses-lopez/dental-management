@@ -27,7 +27,6 @@ $(document).on 'click', 'a.add_fields', (event) ->
 	regexp = new RegExp($(this).data('id'), 'g')
 	form_fields = $(this).data('fields').replace(regexp, time)
 	$($(this).data('container')).append(form_fields)
-
 	event.preventDefault()
 
 #funcionalidad para agregar/eliminar nested_attributes a partir de un select
