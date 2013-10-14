@@ -10,16 +10,10 @@
 		dataString += "data-#{attr}='#{value}' " unless attr in exceptions
 	dataString
 
-@showForm = (val,ide) ->
-    if (val.checked)
-        $(ide).css('display', 'block')
-    else
-        $(ide).css('display', 'none')
-
 #metodos para agregar/eliminar nested_attributes
 $(document).on 'click', 'a.remove_fields', (event) ->
-	$(this).prev('input[type=hidden]').val('1')
-	$(this).closest('fieldset').hide()
+	$(this).siblings('input[type=hidden]').val('1')
+	$(this).closest('.invoice_item').hide()
 	event.preventDefault()
 
 $(document).on 'click', 'a.add_fields', (event) ->

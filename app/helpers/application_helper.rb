@@ -9,9 +9,13 @@ module ApplicationHelper
 		end
 	end
 
-	def link_to_add_fields(name, f, association)
+	def link_to_add_fields(name, f, association, html_class = '')
 		id, fields = add_fields name, f, association
-		link_to(name, '#', class: "add_fields", data: {container: "##{association.to_s}_container" , id: id, fields: fields.gsub("\n", "")})
+		link_to(name, '#', class: "add_fields #{html_class}", data: {container: "##{association.to_s}_container" , id: id, fields: fields.gsub("\n", "")})
+	end
+
+	def link_to_remove_fields(name, f)
+		f.hidden_field(:_destroy) + link_to(name, '#', class: 'remove_fields')
 	end
 
 	def select_to_add_fields(name, f, association, options)

@@ -24,14 +24,13 @@
 			<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
 			<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
 			<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
+			<th></th>
 		</tr>
 		<%= f.fields_for :invoice_items do |builder| %>
 			<%= render 'invoice_items/fields', :f => builder%>
 		<% end %>
-		<tr>
-			<td><%= link_to_add_fields :add_invoice_items, f, :invoice_items %></td>
-		</tr>
 	</table>
+	<%= link_to_add_fields "Agregar #{InvoiceItem.model_name.human}", f, :invoice_items, 'btn btn-success' %>
 
 	<div class='row'>
 		<div class='span4'>
