@@ -1,4 +1,3 @@
-<i class="icon-remove icon-white"></i>
 <tr class='invoice_item'>
 	<%= f.hidden_field :id %>
 	<td><%= f.select :item_id, grouped_options_for_select(get_grouped_options(Item.ordered), f.object.item_id), {prompt: true}, class: 'span4' %></td>
@@ -6,5 +5,5 @@
 	<td><%= f.text_field :item_price, class: 'span2' %></td>
 	<td><%= f.text_field :batch_number, class: 'span2' %></td>
 	<td><%= f.text_field :expiration_date, class: 'span2 datepicker' %></td>
-	<td><%= link_to_remove_fields "remove", f %></td>
+	<td><%= link_to_remove_fields '<i class="icon-remove icon-white"></i>'.html_safe, f, 'btn btn-danger' %></td>
 </tr>

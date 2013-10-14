@@ -16,7 +16,7 @@
 		</div>
 	</div>
 
-	<table class='table table-condensed' id='invoice_items_container'>
+	<table class='table' id='invoice_items_container'>
 		<caption>Detalle de factura</caption>
 		<tr>
 			<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
@@ -30,7 +30,11 @@
 			<%= render 'invoice_items/fields', :f => builder%>
 		<% end %>
 	</table>
-	<%= link_to_add_fields "Agregar #{InvoiceItem.model_name.human}", f, :invoice_items, 'btn btn-success' %>
+	<div class='row'>
+		<div class='text-center'>
+			<%= link_to_add_fields "<i class='icon-plus icon-white'></i> Agregar #{InvoiceItem.model_name.human}".html_safe, f, :invoice_items, 'btn btn-primary btn-large' %>
+		</div>
+	</div>
 
 	<div class='row'>
 		<div class='span4'>

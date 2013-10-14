@@ -14,8 +14,8 @@ module ApplicationHelper
 		link_to(name, '#', class: "add_fields #{html_class}", data: {container: "##{association.to_s}_container" , id: id, fields: fields.gsub("\n", "")})
 	end
 
-	def link_to_remove_fields(name, f)
-		f.hidden_field(:_destroy) + link_to(name, '#', class: 'remove_fields')
+	def link_to_remove_fields(name, f, html_class = '')
+		f.hidden_field(:_destroy) + link_to(name, '#', class: "remove_fields #{html_class}")
 	end
 
 	def select_to_add_fields(name, f, association, options)
