@@ -15,11 +15,7 @@ class InvoicesController < ApplicationController
 	# GET /invoices/new
 	def new
 		@invoice = Invoice.new
-
-		1.times do
-			@invoice.invoice_items << InvoiceItem.new
-		end
-
+		@invoice.invoice_items << InvoiceItem.new
 	end
 
 	# GET /invoices/1/edit
@@ -34,8 +30,10 @@ class InvoicesController < ApplicationController
 			if @invoice.save
 
 				#esto deberia hacerse con un callback en el modelo
-				@invoice.invoice_items.each {|it| it.item.stock += it.quantity }
-
+				@invoice.invoice_items.each do |it|
+					it.item.stock += it.quantity
+					it.item.save
+				end
 
 				format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
 				format.json { render action: 'show', status: :created, location: @invoice }

@@ -20,7 +20,7 @@
 	</tr>
 	<% total = 0 %>
 	<% @invoice.invoice_items.each do |it| %>
-		<% total += it.item_price unless it.nil? %>
+		<% total += it.quantity*it.item_price unless it.nil? %>
 		<%= render 'invoice_items/show', :ii => it%>
 	<% end %>
 </table>
@@ -30,7 +30,7 @@
 		Impuesto: <%= @invoice.tax %>
 	</div>
 	<div class='span5'>
-		<span class='pull-right'>Total: <%= total %></span>
+		<span class='pull-right'>Total: <%= l total %></span>
 	</div>
 </div>
 

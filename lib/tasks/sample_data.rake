@@ -20,7 +20,7 @@ def create_items
 	20.times do
 		item = Item.new(
 			label: Faker::Commerce.product_name,
-			stock: rand(0..200),
+			stock: 0,
 			active: rand(0..1)
 			)
 		item.save!

@@ -2,13 +2,13 @@
 	<%= render 'shared/error_messages', object: @invoice %>
 	<div class='row'>
 		<div class='span3'>
+			<%= f.label :number %>
+			<%= f.text_field :number, class: 'span3'%>
 			<%= f.label :provider_id %>
 			<%= f.select :provider_id, options_for_select(Provider.all.map {|p| [p.label, p.id]}, @invoice.provider_id), class: 'span3' %>
 		</div>
 
 		<div class='span3'>
-			<%= f.label :number %>
-			<%= f.text_field :number, class: 'span3'%>
 		</div>
 		<div class='span3'>
 			<%= f.label :date %>
@@ -32,23 +32,22 @@
 	</table>
 	<div class='row'>
 		<div class='text-center'>
-			<%= link_to_add_fields "<i class='icon-plus icon-white'></i> Agregar #{InvoiceItem.model_name.human}".html_safe, f, :invoice_items, 'btn btn-primary btn-large' %>
+			<%= link_to_add_fields "<i class='icon-plus icon-white'></i> Agregar #{InvoiceItem.model_name.human}".html_safe, f, :invoice_items, 'btn btn-primary' %>
 		</div>
 	</div>
 
 	<div class='row'>
-		<div class='span4'>
+		<div class='span5'>
 			<%= f.label :tax %>
 			<%= f.text_field :tax, class: 'span4' %>
 		</div>
-		<div class='span4'>
+		<div class='span5 pull-right'>
 			<%= f.label :total %>
 			<%= f.text_field :total, class: 'span4' %>
 		</div>
 	</div>
 
-
-	<div class="actions">
+	<div class="row actions pull-right">
 		<%= f.submit %>
 	</div>
 <% end %>
