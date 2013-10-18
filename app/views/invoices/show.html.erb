@@ -1,4 +1,38 @@
-<p id="notice"><%= notice %></p>
+
+<h4>Factura <%= @invoice.number %></h4>
+<div class='row'>
+	<div class='span5'>
+		<h5><%= @invoice.provider.label %></h5>
+	</div>
+	<div class='span5'>
+		<h5 class='pull-right'>Fecha: <%= l @invoice.date %></h5>
+	</div>
+</div>
+<table class='table' id='invoice_items_container'>
+	<caption>Detalle de factura</caption>
+	<tr>
+		<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
+		<th><%= InvoiceItem.human_attribute_name(:quantity) %></th>
+		<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
+		<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
+		<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
+		<th></th>
+	</tr>
+	<% total = 0 %>
+	<% @invoice.invoice_items.each do |it| %>
+		<% total += it.item_price unless it.nil? %>
+		<%= render 'invoice_items/show', :ii => it%>
+	<% end %>
+</table>
+
+<div class='row'>
+	<div class='span5'>
+		Impuesto: <%= @invoice.tax %>
+	</div>
+	<div class='span5'>
+		<span class='pull-right'>Total: <%= total %></span>
+	</div>
+</div>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>
