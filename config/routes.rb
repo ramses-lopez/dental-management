@@ -1,9 +1,13 @@
 DentoSpa::Application.routes.draw do
 
-  resources :users
+	resources :users
 
   	get "items/deliver" => "items#deliver"
   	post "items/update_stock" => "items#update_stock"
+
+  	match 'traces/filter' => 'traces#filter', via: [:get, :post]
+
+  	resources :traces, only: [:index]
 	resources :invoices
 	resources :providers
 	resources :items

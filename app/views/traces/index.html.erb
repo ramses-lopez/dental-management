@@ -1,0 +1,40 @@
+<%= form_for :trace, url: {action: 'filter'} do |f|%>
+	<div class='row'>
+		<div class='span4'>
+			<%= f.label :user_id %>
+			<%= f.select :user_id, options_for_select(User.all.map {|u| [u.name, u.id]}), {prompt: true}, class: 'span4' %>
+			<%= f.label :from %>
+			<%= f.text_field :from, class: 'datepicker span4' %>
+		</div>
+		<div class='span4'>
+			<%= f.label :item_id %>
+			<%= f.select :item_id, grouped_options_for_select(get_grouped_options(Item.all)), {prompt: true}, class: 'span4' %>
+			<%= f.label :until %>
+			<%= f.text_field :until, class: 'datepicker span4' %>
+		</div>
+	</div>
+	<div class="row">
+		<div class='span2'>
+			<%= f.submit :filter, class: 'btn'%>
+		</div>
+	</div>
+<% end %>
+
+<table class='table table-condensed table-hover'>
+	<tr>
+		 <td>Material</td>
+    	 <td>Tipo</td>
+    	 <td>Cantidad</td>
+    	 <td>Usuario</td>
+    	 <td>Fecha</td>
+	</tr>
+	<% @traces.each do |trace| %>
+		<tr class="<%= trace.type == '+' ? 'success' : 'error' %>">
+			<td><%= trace.item.label %></td>
+			<td><i class="icon-white <%= trace.type == '+' ? 'icon-plus-sign' : 'icon-minus-sign' %>"></i></td>
+			<td><%= trace.value %></td>
+			<td><%= trace.user.name %></td>
+			<td><%= l(trace.created_at, format: :short)%></td>
+		</tr>
+	<% end %>
+</table>
