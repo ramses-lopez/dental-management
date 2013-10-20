@@ -1,0 +1,26 @@
+
+<h3>Entrega de Materiales</h3>
+<%= form_for :item, url: {action: 'update_stock'} do %>
+	<table class='table table-condensed table-hover'>
+		<tr>
+			<th>Material</th>
+			<th>En existencia</th>
+			<th>A entregar</th>
+		</tr>
+		<% @items.each do |item| %>
+			<%= fields_for "item_ids[]", item do |item_fields| %>
+				<tr>
+					<%= item_fields.hidden_field :type, value: '-' %>
+					<td><%= item.label %></td>
+					<td><%= item.stock %></td>
+					<td><%= item_fields.number_field :delta, in: 0..item.stock, value: 0, class: 'span1' %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+	<%= submit_tag :go %>
+<% end %>
+
+
+
+

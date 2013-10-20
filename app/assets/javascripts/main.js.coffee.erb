@@ -16,7 +16,7 @@
 # the method to this madness: http://railscasts.com/episodes/390-turbolinks?view=asciicast
 
 #ejecuta metodos para estilos
-initStyles = ->
+@initStyles = ->
 	now = new Date
 	dateFormat = 'dd/mm/yyyy'
 
@@ -37,15 +37,10 @@ initStyles = ->
 	$('input[title],select[title],textarea[title]').tooltip()
 	$('input[type=submit], input[type=button]').addClass('btn btn-success')
 
-#elementos que deben estar ocultos al cargar la pagina
-hideElementsOnLoad = ->
-	#form natural person
-	$('#fieldset_fatca').hide()
 
 #colocar dentro de esta funcion todo lo que se desea cargar en el document.ready
 ready = ->
 	initStyles()
-	hideElementsOnLoad()
 
 #las llamadas al ready
 $(document).ready (ready)

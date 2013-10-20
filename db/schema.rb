@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005182243) do
+ActiveRecord::Schema.define(version: 20131019225018) do
 
   create_table "invoice_items", force: true do |t|
     t.integer  "invoice_id",                                             null: false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20131005182243) do
   create_table "invoices", force: true do |t|
     t.integer  "provider_id",                                                 null: false
     t.string   "number",                                                      null: false
-    t.date     "date",                                 default: '2013-10-18', null: false
+    t.date     "date",                                 default: '2013-10-20', null: false
     t.decimal  "total",       precision: 15, scale: 2, default: 0.0
     t.decimal  "tax",         precision: 15, scale: 2, default: 0.0
     t.datetime "created_at"
@@ -48,6 +48,31 @@ ActiveRecord::Schema.define(version: 20131005182243) do
     t.string   "email"
     t.string   "website"
     t.text     "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "traces", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "value"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.integer  "role_id"
+    t.integer  "active"
+    t.string   "name"
+    t.string   "password"
+    t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

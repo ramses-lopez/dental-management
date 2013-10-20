@@ -33,9 +33,13 @@ class InvoicesController < ApplicationController
 				@invoice.invoice_items.each do |it|
 					it.item.stock += it.quantity
 					it.item.save
+
+					trace = Trace.new(user_id:1, item_id: it.item.id, value: it.quantity, type: '+')
+					trace.save
+
 				end
 
-				format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+				format.html { redirect_to @invoice, notice: 'Factura creada' }
 				format.json { render action: 'show', status: :created, location: @invoice }
 			else
 				format.html { render action: 'new' }

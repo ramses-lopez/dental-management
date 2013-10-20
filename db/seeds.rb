@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+def clear_and_reset(classname)
+	classname.classify.constantize.destroy_all
+	ActiveRecord::Base.connection.reset_pk_sequence!(classname.tableize)
+end
+
+ActiveRecord::Base.transaction do
+
+	clear_and_reset('Role')
+	Role.create!([
+		{ name: "Administrador"},
+		{ name: "Encargado"}
+	])
+
+end

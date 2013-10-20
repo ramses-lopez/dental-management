@@ -1,8 +1,14 @@
 class Item < ActiveRecord::Base
 	has_many :invoice_items
 	has_many :invoices, through: :invoice_items
+	has_many :traces
+
+	#campos para tracing
+	attr_accessor :delta, :type
 
 	default_scope {order :label}
+
+	scope :in_stock, -> {where ('stock > 0')}
 
 	with_options presence: :true do |opt|
 		opt.validates :stock, numericality: { only_integer: true }

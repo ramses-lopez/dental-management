@@ -5,6 +5,7 @@ namespace :db do
 		ActiveRecord::Base.transaction do
 			create_items
 			create_providers
+			create_users
 		end
 	end
 end
@@ -14,6 +15,20 @@ def reset_db
 	Rake::Task['db:create'].invoke
 	Rake::Task['db:migrate'].invoke
 	Rake::Task['db:seed'].invoke
+end
+
+def create_users
+
+	user = User.new(
+		name: 'Administrador',
+		role_id: 1,
+		password: 123456,
+		active: 1,
+		username: 'admin'
+		)
+
+	user.save!
+
 end
 
 def create_items

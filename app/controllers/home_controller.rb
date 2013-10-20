@@ -2,10 +2,9 @@ class HomeController < ApplicationController
 	def index
 	end
 
-	def report1
+	def deliver
+
 	end
 
-	def report2
-	end
 
 end
