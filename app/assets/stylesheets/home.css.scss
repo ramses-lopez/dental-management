@@ -13,6 +13,11 @@ body
 	background-color: #3377bb;
 }
 
+h1, h2, h3
+{
+	text-align: center;
+}
+
 .navbar
 {
 	margin: 10px 0px
@@ -52,6 +57,19 @@ body
 	{
 		font-weight: bold;
 		font-size: 100%;
+	}
+
+	tr th
+	{
+		background-color: #3377bb;
+		color: #ffffff;
+		text-align: center;
+	}
+
+	td
+	{
+		font-size: 90%;
+		text-align: center;
 	}
 }
 

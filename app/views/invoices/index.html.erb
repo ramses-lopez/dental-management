@@ -1,29 +1,28 @@
-<h1>Facturas</h1>
+<h3>Facturas</h3>
 
-<table class='table table-hover table-condensed'>
-  <thead>
-    <tr>
-      <th>Proveedor</th>
-      <th>Fecha</th>
-      <th>Numero</th>
-      <th>Modificada</th>
-      <th colspan=3></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <tr>
-        <td><%= invoice.provider.label %></td>
-        <td><%= invoice.number %></td>
-        <td><%= invoice.date %></td>
-        <td><%= invoice.updated_at %></td>
-        <td><%= link_to 'Show', invoice %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<table class='table table-hover table-condensed table-bordered'>
+	<thead>
+		<tr>
+			<th>Proveedor</th>
+			<th>Número</th>
+			<th>Fecha</th>
+			<th>Modificada</th>
+			<th colspan=1></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @invoices.each do |invoice| %>
+			<tr>
+				<td><%= invoice.provider.label %></td>
+				<td><%= invoice.number %></td>
+				<td><%= invoice.date %></td>
+				<td><%= invoice.updated_at.to_formatted_s(:short) %></td>
+
+				<td><%= render 'shared/btn_group_action', object: invoice %> </td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
 <br>
 
-<%= link_to 'Nueva factura', new_invoice_path %>
+<%= link_to 'Nueva factura', new_invoice_path, class: 'btn' %>

@@ -34,12 +34,11 @@ class InvoicesController < ApplicationController
 					it.item.stock += it.quantity
 					it.item.save
 
-					trace = Trace.new(user_id:1, item_id: it.item.id, value: it.quantity, type: '+')
+					trace = Trace.new(user_id:1, item_id: it.item.id, value: it.quantity, type: '+', comment: 'Ingreso por factura')
 					trace.save
-
 				end
 
-				format.html { redirect_to @invoice, notice: 'Factura creada' }
+				format.html { redirect_to @invoice, success: 'Factura creada' }
 				format.json { render action: 'show', status: :created, location: @invoice }
 			else
 				format.html { render action: 'new' }

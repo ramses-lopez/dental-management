@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-	def full_title(page_title)
+	def full_title(page_title = '')
 		base_title = "Dento Spa Laser"
 		if page_title.empty?
 			base_title

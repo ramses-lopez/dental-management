@@ -1,6 +1,9 @@
-<h1>Productos en inventario</h1>
 
-<table class='table table-condensed table-hover'>
+<h3>Listado de <%= Item.model_name.human.pluralize(:es) %></h3>
+<div class='text-right row'>
+  <%= link_to "Nuevo #{Item.model_name.human}", new_item_path, class: 'btn' %>
+</div>
+<table class='table table-condensed table-hover table-bordered'>
   <thead>
     <tr>
       <th>Descripción</th>
@@ -10,7 +13,6 @@
       <th></th>
     </tr>
   </thead>
-
   <tbody>
     <% @items.each do |item| %>
       <tr>
@@ -24,6 +26,4 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'Nuevo Producto', new_item_path, class: 'btn' %>

@@ -6,4 +6,6 @@ class Invoice < ActiveRecord::Base
 
 	#hay que validar que manden al menos un invoice item
 
+
+
 end

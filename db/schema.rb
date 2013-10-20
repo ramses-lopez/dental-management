@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20131019225018) do
     t.integer  "item_id"
     t.integer  "value"
     t.string   "type"
+    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

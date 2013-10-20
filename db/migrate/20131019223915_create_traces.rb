@@ -5,6 +5,7 @@ class CreateTraces < ActiveRecord::Migration
     	t.integer :item_id
     	t.integer :value
     	t.string :type
+    	t.string :comment
 
 		t.timestamps
     end
