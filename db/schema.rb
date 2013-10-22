@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20131019225018) do
   create_table "invoices", force: true do |t|
     t.integer  "provider_id",                                                 null: false
     t.string   "number",                                                      null: false
-    t.date     "date",                                 default: '2013-10-20', null: false
+    t.date     "date",                                 default: '2013-10-22', null: false
     t.decimal  "total",       precision: 15, scale: 2, default: 0.0
     t.decimal  "tax",         precision: 15, scale: 2, default: 0.0
     t.datetime "created_at"

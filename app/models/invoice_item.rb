@@ -2,51 +2,39 @@ class InvoiceItem < ActiveRecord::Base
 	belongs_to :invoice
 	belongs_to :item
 
-	before_save :update_stock
+	before_save :update_stock, unless: :new_record?
+	before_save :add_stock, if: :new_record?
 
 	def update_stock
 
-		logger.debug "before_save"
+		comment = "Actualización Factura #{self.invoice.number}"
 
-		#Se cambio el material
 		if self.item_id_changed?
 
 			old_item = Item.find self.item_id_was
+			old_item.remove_stock self.quantity_was
+			old_item.comment = comment
+			old_item.save!
 
-			logger.debug "Stock Item Anterior #{old_item.label} (#{old_item.stock})"
-
-			#elimino el monto anterior y se suma el nuevo monto
-			old_item.stock -= self.quantity_was
-			#se agrega la cantidad al nuevo item
-
-			old_item.save
-
-			logger.debug "Stock Item Anterior Actualizado #{old_item.label} (#{old_item.stock})"
-			logger.debug "Nuevo Item #{self.item.label}(#{self.item.stock})"
-
-			self.item.stock += self.quantity
-
-			logger.debug "Nuevo Item #{self.item.label}(#{self.item.stock})"
+			self.item.add_stock self.quantity
 
 		elsif self.quantity_changed?
-			logger.debug "quantity_changed"
-
-			logger.debug "stock #{self.item.stock}"
-
-			self.item.stock -= self.quantity_was
-			self.item.stock += self.quantity
-
-			logger.debug "stock #{self.item.stock}"
+			self.item.remove_stock self.quantity_was
+			self.item.add_stock self.quantity
 
 		elsif self.destroyed?
-			logger.debug "self.destroyed"
-			logger.debug "stock #{self.item.stock}"
-
-			self.item.stock -= self.quantity
-
-			logger.debug "stock #{self.item.stock}"
+			self.item.remove_stock self.quantity
 		end
 
-		self.item.save
+		self.item.comment = comment
+		self.item.save!
+
 	end
+
+	def add_stock
+		self.item.comment = "Inserción de #{Item.model_name.human} #{self.item.label}"
+		self.item.add_stock self.quantity
+		self.item.save!
+	end
+
 end

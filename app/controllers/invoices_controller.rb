@@ -28,16 +28,6 @@ class InvoicesController < ApplicationController
 		@invoice = Invoice.new(invoice_params)
 		respond_to do |format|
 			if @invoice.save
-
-				#esto deberia hacerse con un callback en el modelo
-				@invoice.invoice_items.each do |it|
-					it.item.stock += it.quantity
-					it.item.save
-
-					trace = Trace.new(user_id:1, item_id: it.item.id, value: it.quantity, type: '+', comment: 'Ingreso por factura')
-					trace.save
-				end
-
 				format.html { redirect_to @invoice, success: 'Factura creada' }
 				format.json { render action: 'show', status: :created, location: @invoice }
 			else
