@@ -1,6 +1,9 @@
 DentoSpa::Application.routes.draw do
 
+	get "login" => "sessions#new", as: 'login'
+	get "sign_up" => "users#new", as: 'sign_up'
 	resources :users
+	resources :sessions
 
   	get "items/deliver" => "items#deliver"
   	post "items/update_stock" => "items#update_stock"

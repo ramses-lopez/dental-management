@@ -5,7 +5,7 @@ namespace :db do
 		ActiveRecord::Base.transaction do
 			create_items
 			create_providers
-			create_users
+			#create_users
 		end
 	end
 end

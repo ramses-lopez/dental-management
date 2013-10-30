@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20131019225018) do
   create_table "invoices", force: true do |t|
     t.integer  "provider_id",                                                 null: false
     t.string   "number",                                                      null: false
-    t.date     "date",                                 default: '2013-10-22', null: false
+    t.date     "date",                                 default: '2013-10-30', null: false
     t.decimal  "total",       precision: 15, scale: 2, default: 0.0
     t.decimal  "tax",         precision: 15, scale: 2, default: 0.0
     t.datetime "created_at"
@@ -72,7 +72,8 @@ ActiveRecord::Schema.define(version: 20131019225018) do
     t.integer  "role_id"
     t.integer  "active"
     t.string   "name"
-    t.string   "password"
+    t.string   "password_hash"
+    t.string   "password_salt"
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
