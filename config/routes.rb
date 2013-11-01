@@ -1,7 +1,8 @@
 DentoSpa::Application.routes.draw do
 
-	get "login" => "sessions#new", as: 'login'
-	get "sign_up" => "users#new", as: 'sign_up'
+	get "login" => "sessions#new"
+	get "sign_up" => "users#new"
+	get "sign_out" => "sessions#destroy"
 	resources :users
 	resources :sessions
 
@@ -18,7 +19,7 @@ DentoSpa::Application.routes.draw do
 	resources :traces
 
 	get "home/index"
-	root "home#index"
+	root 'sessions#new'
 
 	# The priority is based upon order of creation: first created -> highest priority.
 	# See how all your routes lay out with "rake routes".

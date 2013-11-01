@@ -5,6 +5,9 @@
 		</a>
 	</div>
 	<div class='offset4'>
+		<% if signed_in? %>
+			<h6 class="text-right"><%= current_user.name %> <%= link_to 'Cerrar Sesión', sign_out_path %></h6>
+		<% end %>
 		<ul class="nav nav-pills">
 			<li class='nav-link pull-right'><%= link_to 'Inventario', home_index_path%></li>
 		</ul>
