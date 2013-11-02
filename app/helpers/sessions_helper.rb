@@ -31,7 +31,7 @@ module SessionsHelper
 
 	def signed_in_user
 		unless signed_in?
-			redirect_to root_url, notice: I18n.t('text.session.must.signin')
+			redirect_to root_url, notice: I18n.t('text.session.must_sign_in')
 		end
 	end
 

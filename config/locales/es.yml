@@ -233,4 +233,6 @@ es:
     edit: Modificar
     delete: Eliminar
     save: Guardar
+    session:
+      must_sign_in: Debe ingresar a la aplicación
 

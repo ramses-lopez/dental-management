@@ -4,33 +4,35 @@
 	<div class='span5'>
 		<h5><%= @invoice.provider.label %></h5>
 	</div>
-	<div class='span5'>
-		<h5 class='pull-right'>Fecha: <%= l @invoice.date %></h5>
+	<div class='span6'>
+		<span class='pull-right text-right'><b>Fecha:</b> <%= @invoice.date.to_formatted_s(:short_date) %></span>
 	</div>
 </div>
-<table class='table' id='invoice_items_container'>
-	<caption>Detalle de factura</caption>
-	<tr>
-		<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
-		<th><%= InvoiceItem.human_attribute_name(:quantity) %></th>
-		<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
-		<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
-		<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
-		<th></th>
-	</tr>
-	<% total = 0 %>
-	<% @invoice.invoice_items.each do |it| %>
-		<% total += it.quantity*it.item_price unless it.nil? %>
-		<%= render 'invoice_items/show', :ii => it%>
-	<% end %>
+
+<h4 class='text-center'><%=InvoiceItem.model_name.human.pluralize(:es)%> en <%= Invoice.model_name.human%></h4>
+
+<table class='table table-condensed table-bordered' id='invoice_items_container'>
+	<thead>
+		<tr>
+			<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:quantity) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
+			<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @invoice.invoice_items.each do |it| %>
+			<%= render 'invoice_items/show', :ii => it%>
+		<% end %>
+	</tbody>
 </table>
 
-<div class='row'>
-	<div class='span5'>
-		Impuesto: <%= @invoice.tax %>
-	</div>
-	<div class='span5'>
-		<span class='pull-right'>Total: <%= total %></span>
+<div class='row text-right'>
+	<div class='span11'>
+		<p><b>Subtotal:</b> Bs. <span id='subtotal'>0</span></p>
+		<p><b>Impuesto (12%):</b> Bs. <span id='tax'>0</span></p>
+		<p><b>Total:</b> Bs. <span id='total'>0</span></p>
 	</div>
 </div>
 

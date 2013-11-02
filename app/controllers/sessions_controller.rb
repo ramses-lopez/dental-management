@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 	skip_before_action :signed_in_user, only: [:new, :create]
 
 	def new
-		redirect_to home_index if signed_in?
+		redirect_to home_index_path if signed_in?
 	end
 
 	def create
