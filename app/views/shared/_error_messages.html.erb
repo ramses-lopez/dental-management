@@ -1,6 +1,6 @@
 <% if object.errors.any? %>
-	<div id="error_explanation">
-		<h2><%= I18n.t('activerecord.errors.template.header', model: object.class.model_name.human, count: object.errors.full_messages.count) %></h2>
+	<div id="error_explanation" class='alert alert-error'>
+		<h4><%= I18n.t('activerecord.errors.template.header', model: object.class.model_name.human, count: object.errors.full_messages.count) %></h4>
 		<ul>
 			<% object.errors.full_messages.each do |msg| %>
 			<li><%= msg %></li>

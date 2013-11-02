@@ -1,53 +1,54 @@
-<%= form_for(@invoice) do |f| %>
+<%= form_for(@invoice, html: {autocomplete: 'off'}) do |f| %>
 	<%= render 'shared/error_messages', object: @invoice %>
-	<div class='row'>
-		<div class='span3'>
-			<%= f.label :number %>
-			<%= f.text_field :number, class: 'span3'%>
+	<div class='row text-center'>
+		<div class='span4'>
 			<%= f.label :provider_id %>
-			<%= f.select :provider_id, options_for_select(Provider.all.map {|p| [p.label, p.id]}, @invoice.provider_id), class: 'span3' %>
+			<%= f.select :provider_id, options_for_select(Provider.all.map {|p| [p.label, p.id]}, @invoice.provider_id), {prompt: true} ,class: 'span3' %>
 		</div>
-
-		<div class='span3'>
+		<div class='span4'>
+			<%= f.label :number %>
+			<%= f.text_field :number, class: 'number span3'%>
 		</div>
 		<div class='span3'>
 			<%= f.label :date %>
-			<%= f.text_field :date, class: 'datepicker span3'%>
+			<div class="input-append date until_now_cal">
+				<%= f.text_field :date, value: Time.now.to_formatted_s(:short_date), class: 'until_now_cal span3 number'%>
+				<span class="add-on"><i class="icon-th"></i></span>
+			</div>
 		</div>
 	</div>
 
-	<table class='table table-condensed' id='invoice_items_container'>
-		<caption>Detalle de factura</caption>
-		<tr>
-			<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
-			<th><%= InvoiceItem.human_attribute_name(:quantity) %></th>
-			<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
-			<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
-			<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
-			<th></th>
-		</tr>
-		<%= f.fields_for :invoice_items do |builder| %>
-			<%= render 'invoice_items/fields', :f => builder%>
-		<% end %>
+	<h4 class='text-center'><%=InvoiceItem.model_name.human.pluralize(:es)%> en <%= Invoice.model_name.human%></h4>
+	<table class='table table-condensed table-bordered table-hover' id='invoice_items_container'>
+		<thead>
+			<tr>
+				<th><%= InvoiceItem.human_attribute_name(:item_id) %></th>
+				<th><%= InvoiceItem.human_attribute_name(:quantity) %></th>
+				<th><%= InvoiceItem.human_attribute_name(:item_price) %></th>
+				<th><%= InvoiceItem.human_attribute_name(:batch_number) %></th>
+				<th><%= InvoiceItem.human_attribute_name(:expiration_date) %></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<%= f.fields_for :invoice_items do |builder| %>
+				<%= render 'invoice_items/fields', :f => builder %>
+			<% end %>
+		</tbody>
 	</table>
-	<div class='row'>
-		<div class='text-center'>
-			<%= link_to_add_fields "<i class='icon-plus icon-white'></i> Agregar #{InvoiceItem.model_name.human}".html_safe, f, :invoice_items, 'btn btn-primary' %>
+	<div class='row text-center'>
+		<%= link_to_add_fields "<i class='icon-plus'></i> #{t 'text.add'} #{InvoiceItem.model_name.human}".html_safe, f, :invoice_items, 'btn' %>
+	</div>
+
+	<div class='row text-right'>
+		<div class='span11'>
+			<p><b>Subtotal:</b> Bs. <span id='subtotal'>0</span></p>
+			<p><b>Impuesto (12%):</b> Bs. <span id='tax'>0</span></p>
+			<p><b>Total:</b> Bs. <span id='total'>0</span></p>
 		</div>
 	</div>
 
-	<div class='row'>
-		<div class='span5'>
-			<%= f.label :tax %>
-			<%= f.text_field :tax, class: 'span4' %>
-		</div>
-		<div class='span5 pull-right'>
-			<%= f.label :total %>
-			<%= f.text_field :total, class: 'span4' %>
-		</div>
-	</div>
-
-	<div class="row actions pull-right">
-		<%= f.submit %>
+	<div class="row text-center">
+		<%= f.submit t('text.save') + ' ' + Invoice.model_name.human, class: 'btn btn-large' %>
 	</div>
 <% end %>

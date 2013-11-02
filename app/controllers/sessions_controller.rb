@@ -3,18 +3,17 @@ class SessionsController < ApplicationController
 	skip_before_action :signed_in_user, only: [:new, :create]
 
 	def new
+		redirect_to home_index if signed_in?
 	end
 
 	def create
-
 		user = User.authenticate(params[:username], params[:password])
-
 		if user
 			session[:user_id] = user.id
-			redirect_to home_index_path, :notice => "Logged in!"
+			redirect_to home_index_path, notice: "Bienvenido #{current_user.name}"
 		else
-			flash.now.alert = "Invalid username or password"
-			render "new"
+			flash.now.alert = 'Usuario o contraseña incorrecta'
+			render :new
 		end
 	end
 

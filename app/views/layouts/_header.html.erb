@@ -1,15 +1,15 @@
 <div class='header row'>
 	<div class='span3'>
-		<a class="brand" href="#">
+		<%= link_to home_index_path do %>
 			<%= image_tag 'logodentoa1.png'%>
-		</a>
+		<% end %>
 	</div>
 	<div class='offset4'>
 		<% if signed_in? %>
-			<h6 class="text-right"><%= current_user.name %> <%= link_to 'Cerrar Sesión', sign_out_path %></h6>
+			<h6 class="text-right"><%= current_user.name %> (<%= link_to 'Cerrar Sesión', sign_out_path %>)</h6>
+		<% else %>
+			<h6 class="text-right"><%= link_to 'Iniciar Sesión', sign_in_path %></h6>
 		<% end %>
-		<ul class="nav nav-pills">
-			<li class='nav-link pull-right'><%= link_to 'Inventario', home_index_path%></li>
-		</ul>
+
 	</div>
 </div>

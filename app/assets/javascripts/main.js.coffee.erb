@@ -16,31 +16,39 @@
 # the method to this madness: http://railscasts.com/episodes/390-turbolinks?view=asciicast
 
 #ejecuta metodos para estilos
-@initStyles = ->
+@init_styles = ->
 	now = new Date
 	dateFormat = 'dd/mm/yyyy'
 
-	birthpickerOptions =
+	until_now_cal =
 		autoclose: true
 		format: dateFormat
 		language: '<%= I18n.locale %>'
-		startDate: new Date now.getFullYear() - 100, now.getMonth(), now.getDate()
+		startDate: '-2y'
 		endDate: now
 
-	datepickerOptions =
+	open_cal =
 		autoclose: true
 		format: dateFormat
 		language: '<%= I18n.locale %>'
 
-	$('.birthpicker').datepicker(birthpickerOptions)
-	$('.datepicker').datepicker(datepickerOptions)
+	from_now_cal =
+		autoclose: true
+		format: dateFormat
+		language: '<%= I18n.locale %>'
+		startDate: now
+
+	$('.until_now_cal').datepicker(until_now_cal)
+	$('.open_cal').datepicker(open_cal)
+	$('.from_now_cal').datepicker(from_now_cal)
+
 	$('input[title],select[title],textarea[title]').tooltip()
 	$('input[type=submit], input[type=button]').addClass('btn')
 
 
 #colocar dentro de esta funcion todo lo que se desea cargar en el document.ready
 ready = ->
-	initStyles()
+	init_styles()
 
 #las llamadas al ready
 $(document).ready (ready)

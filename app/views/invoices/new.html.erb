@@ -1,5 +1,5 @@
-<h3>Ingresar factura </h3>
+<h3><%= t('text.new') + " " + Invoice.model_name.human %></h3>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', invoices_path %>
+<%= link_to t('text.back'), invoices_path %>

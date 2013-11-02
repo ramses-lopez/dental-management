@@ -212,18 +212,25 @@ es:
     attributes:
       invoice:
         provider_id: Proveedor
-        number: Factura No.
+        number: Número de Factura
         date: Fecha Factura
         total: Total
         tax: Impuesto
       invoice_item:
         item_id: Material
         quantity: Cantidad
-        item_price: Precio/Unidad
+        item_price: Precio unitario
         batch_number: Lote
         expiration_date: Fecha Vencimiento
       item:
         label: Descripción
         stock: Existencia
-
+  text:
+    add: Agregar
+    back: Regresar
+    show: Ver
+    new: Crear
+    edit: Modificar
+    delete: Eliminar
+    save: Guardar
 

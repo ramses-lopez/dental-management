@@ -1,6 +1,6 @@
 DentoSpa::Application.routes.draw do
 
-	get "login" => "sessions#new"
+	get "sign_in" => "sessions#new"
 	get "sign_up" => "users#new"
 	get "sign_out" => "sessions#destroy"
 	resources :users

@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//Estandares de uso
+// h3 para los titulos que identifican cada pagina
+
 $headingsColor: #1f4c78;
 $textColor: #444444;
 @import "bootstrap";
@@ -13,9 +16,19 @@ body
 	background-color: #3377bb;
 }
 
-h1, h2, h3
+h1, h2
 {
 	text-align: center;
+}
+
+label
+{
+	font-weight: bold;
+}
+
+input.number, input.date
+{
+    text-align:right;
 }
 
 .navbar
@@ -26,6 +39,7 @@ h1, h2, h3
 .header
 {
 	font-size: 125%;
+	margin-bottom: 20px;
 
 	ul
 	{
@@ -71,6 +85,11 @@ h1, h2, h3
 		font-size: 90%;
 		text-align: center;
 	}
+}
+
+.error_explanation
+{
+
 }
 
 
