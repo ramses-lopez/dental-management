@@ -1,6 +1,6 @@
-
-<h3>Entrega de Materiales</h3>
+<h3>Actualización de Inventario</h3>
 <%= form_for :item, url: {action: 'update_stock'} do %>
+<div style='height: 400px; overflow: scroll; '>
 	<table class='table table-hover table-bordered table-condensed'>
 		<thead>
 			<tr>
@@ -14,7 +14,7 @@
 				<%= fields_for "item_ids[]", item do |item_fields| %>
 					<tr>
 						<%= item_fields.hidden_field :type, value: '-' %>
-						<%= item_fields.hidden_field :comment, value: 'Entrega de material' %>
+						<%= item_fields.hidden_field :comment, value: 'Actualización de Inventario' %>
 						<td><%= item.label %></td>
 						<td><%= item.stock %></td>
 						<td><%= item_fields.number_field :delta, in: 0..item.stock, value: 0, class: 'span1' %></td>
@@ -23,5 +23,6 @@
 			<% end %>
 		</tbody>
 	</table>
+</div>
 	<%= submit_tag 'Registrar Entrega' %>
 <% end %>

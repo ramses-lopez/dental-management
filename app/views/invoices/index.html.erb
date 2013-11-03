@@ -27,5 +27,4 @@
 	<%= render 'shared/no_records_found', object_class: Invoice %>
 <% end %>
 <br>
-
-<%= link_to "Crear #{Invoice.model_name.human}", new_invoice_path, class: 'btn' %>
+<%= link_to "#{t('text.new')} #{Invoice.model_name.human}", new_invoice_path, class: 'btn' %>

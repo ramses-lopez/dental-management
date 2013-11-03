@@ -5,7 +5,7 @@ namespace :db do
 		ActiveRecord::Base.transaction do
 			create_items
 			create_providers
-			#create_users
+			create_users
 		end
 	end
 end
@@ -18,15 +18,19 @@ def reset_db
 end
 
 def create_users
+	pass = '123456'
 
 	user = User.new(
 		name: 'Administrador',
 		role_id: 1,
-		password: 123456,
+		password_hash: pass,
+		password_salt: 'test',
 		active: 1,
 		username: 'admin'
 		)
 
+	user.password = pass
+	user.password_confirmation = pass
 	user.save!
 
 end

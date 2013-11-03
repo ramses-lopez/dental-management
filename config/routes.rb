@@ -7,6 +7,7 @@ DentoSpa::Application.routes.draw do
 	resources :sessions
 
   	get "items/deliver" => "items#deliver"
+  	get "items/update_inventory" => "items#update_inventory"
   	post "items/update_stock" => "items#update_stock"
 
   	match 'traces/filter' => 'traces#filter', via: [:get, :post]

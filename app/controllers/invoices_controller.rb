@@ -10,6 +10,19 @@ class InvoicesController < ApplicationController
 	# GET /invoices/1
 	# GET /invoices/1.json
 	def show
+
+		#calculo del total, subtotal e impuesto
+		@subtotal = 0
+		@tax_total = 0
+		tax = 0.12
+
+		@invoice.invoice_items.each do |item|
+			@subtotal += item.item_price
+		end
+
+		@tax_total = @subtotal*tax
+		@total = @subtotal*(1+tax)
+
 	end
 
 	# GET /invoices/new
@@ -64,7 +77,11 @@ class InvoicesController < ApplicationController
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_invoice
-		@invoice = Invoice.find(params[:id])
+		begin
+			@invoice = Invoice.find(params[:id])
+		rescue ActiveRecord::RecordNotFound => e
+			redirect_to invoices_path, error: "No se encontró la #{Invoice.model_name.human} con ID #{params[:id]}"
+		end
 	end
 
 	# Never trust parameters from the scary internet, only allow the white list through.

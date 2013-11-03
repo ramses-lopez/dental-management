@@ -8,19 +8,19 @@
 	</head>
 	<body class='container'>
 		<% if Rails.env == 'development' %>
-			<% deadline = Date.new(2013,10,28)%>
+			<% deadline = Date.new(2013,11,30)%>
 			<h4 style="color: white; text-align: center">Entrega el: <%= "#{deadline} (#{(deadline - Date.today).to_i} días)" %></h4>
-			<h5 style="color: white; text-align: center">First do it. Then do it right. Then do it better.</h5>
 		<% end %>
 		<div class='content'>
 			<%= render 'layouts/header'%>
 			<% flash.each do |key, value| %>
-			  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+				<%= content_tag(:div, value, class: "alert alert-#{key}") %>
 			<% end %>
 			<%= yield %>
 			<%= render 'layouts/footer'%>
 		</div>
 		<% if Rails.env == 'development' %>
+			<h5 style="color: white; text-align: center">First do it. Then do it right. Then do it better.</h5>
 			<%= debug(session.to_hash) %>
 			<%= debug(params) %>
 		<% end %>

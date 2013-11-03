@@ -209,6 +209,7 @@ es:
       invoice: Factura
       invoice_item: Material
       item: Material
+      provider: Proveedor
     attributes:
       invoice:
         provider_id: Proveedor

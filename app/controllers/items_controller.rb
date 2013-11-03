@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 
 		respond_to do |format|
 			if @item.save
-				format.html { redirect_to @item, notice: 'Item was successfully created.' }
+				format.html { redirect_to @item, notice: "#{Item.model_name.human} creado." }
 				format.json { render action: 'show', status: :created, location: @item }
 			else
 				format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @item.update(item_params)
-				format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+				format.html { redirect_to @item, notice: "#{Item.model_name.human} actualizado." }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
@@ -65,22 +65,25 @@ class ItemsController < ApplicationController
 		@items = Item.in_stock
 	end
 
+	def update_inventory
+		@items = Item.all
+	end
+
 	def update_stock
 
 		items_to_update = Item.find params[:item_ids].keys
 		items_to_update.each do |item|
 
 			type = params[:item_ids][item.id.to_s]['type']
+			comment = params[:item_ids][item.id.to_s]['comment']
 			delta = params[:item_ids][item.id.to_s]['delta'].to_i
 
 			if delta > 0
 				delta *= -1 if type == '-'
-
 				item.stock += delta
+				item.trace_comment = comment
+				item.trace_user = current_user.id
 				item.save
-
-				trace = Trace.new(user_id:1, item_id: item.id, value: delta, type: type)
-				trace.save
 			end
 
 		end

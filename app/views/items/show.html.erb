@@ -1,12 +1,12 @@
-<p>
-  <strong>Label:</strong>
-  <%= @item.label %>
-</p>
-
-<p>
-  <strong>Stock:</strong>
-  <%= @item.stock %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<div class='row'>
+	<div class='span4'>
+		<b><%= Item.human_attribute_name(:label)%>: </b>
+		<%= @item.label %>
+	</div>
+	<div class='span4'>
+		<b><%= Item.human_attribute_name(:stock)%>: </b>
+		<%= @item.stock %>
+	</div>
+</div>
+<br>
+<%= render 'shared/edit_show', object: @item %>

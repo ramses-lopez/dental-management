@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
 	after_save :add_trace #, unless: :new_record?
 
 	#campos para tracing
-	attr_accessor :delta, :type, :comment
+	attr_accessor :delta, :type, :trace_comment, :trace_user
 
 	default_scope {order :label}
 
@@ -40,8 +40,8 @@ class Item < ActiveRecord::Base
 
 	def add_trace
 		trace = self.traces.build
-		trace.comment = self.comment
-		trace.user_id = 1
+		trace.comment = self.trace_comment
+		trace.user_id = self.trace_user
 		trace.value =  self.stock - self.stock_was
 		trace.type = trace.value >= 0 ? '+' : '-'
 		trace.save!

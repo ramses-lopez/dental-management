@@ -1,7 +1,7 @@
 <tr>
 	<td><%= ii.item.label %></td>
 	<td><%= ii.quantity %></td>
-	<td><%= ii.item_price %></td>
+	<td>Bs. <%= ii.item_price %></td>
 	<td><%= ii.batch_number %></td>
-	<td><%= ii.expiration_date %></td>
+	<td><%= ii.expiration_date.nil? ? 'No aplica' : ii.expiration_date.to_formatted_s(:short_date)  %></td>
 </tr>

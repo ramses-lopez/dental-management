@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20131019225018) do
     t.integer  "quantity",                                 default: 1,   null: false
     t.decimal  "item_price",      precision: 15, scale: 2, default: 0.0
     t.string   "batch_number"
-    t.date     "expiration_date"
+    t.datetime "expiration_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
