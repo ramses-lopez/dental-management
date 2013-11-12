@@ -1,25 +1,37 @@
-<h1>Listing providers</h1>
+<h3>Listado de <%= Provider.model_name.human.pluralize %></h3>
+<% if @providers.size > 0 %>
+	<table class='table table-hover table-condensed table-bordered'>
+		<thead>
+			<tr>
+				<th><%= Provider.human_attribute_name(:label)%></th>
+				<th><%= Provider.human_attribute_name(:phone)%></th>
+				<th><%= Provider.human_attribute_name(:email)%></th>
+				<th><%= Provider.human_attribute_name(:website)%></th>
+				<th></th>
+			</tr>
+		</thead>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @providers.each do |provider| %>
-      <tr>
-        <td><%= link_to 'Show', provider %></td>
-        <td><%= link_to 'Edit', edit_provider_path(provider) %></td>
-        <td><%= link_to 'Destroy', provider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+		<tbody>
+			<% @providers.each do |provider| %>
+				<tr>
+					<td><%= provider.label %></td>
+					<td><%= provider.phone %></td>
+					<td><%= mail_to provider.email %></td>
+					<td><%= link_to provider.website %></td>
+					<td><%= render 'shared/btn_group_action', object: provider %> </td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<%= render 'shared/no_records_found', object_class: Invoice %>
+<% end %>
 <br>
+<%= link_to "#{t('text.new')} #{Provider.model_name.human}", new_provider_path, class: 'btn' %>
 
-<%= link_to 'New Provider', new_provider_path %>
+
+
+
+
+
+
