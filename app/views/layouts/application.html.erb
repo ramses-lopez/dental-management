@@ -22,30 +22,7 @@
 		<% if Rails.env == 'development' %>
 			<h5 style="color: white; text-align: center">First do it. Then do it right. Then do it better.</h5>
 
-			<div class='well'>
-				<h3>To - Do</h3>
-				<ol>
-					<li>Paginación</li>
-					<li>Pagina de actualizacion de inventario (actualizacion con textfield)</li>
-					<li>Cerrar sesiones por tiempo</li>
-					<li>Links de paginas a reportes</li>
-					<li>L&F CRUD proveedor
-					<ul>
-						<li>show</li>
-						<li>edit</li>
-						<li>create</li>
-						<li>diccionario</li>
-					</ul>
-					</li>
-					<li>Reportes
-						<ul>
-							<li>Materiales utilizados en el mes</li>
-							<li>Productos por acabarse</li>
-							<li>Productos por vencerse</li>
-						</ul>
-					</li>
-				</ol>
-			</div>
+			<%= render 'layouts/to_do'%>
 			<%= debug(session.to_hash) %>
 			<%= debug(params) %>
 		<% end %>
