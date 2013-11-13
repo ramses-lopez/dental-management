@@ -1,6 +1,3 @@
-<h1>Editing provider</h1>
-
+<%= render partial: 'shared/form_title', locals: {object: Provider, action: 'edit'} %>
 <%= render 'form' %>
-
-<%= link_to 'Show', @provider %> |
-<%= link_to 'Back', providers_path %>
+<%= render 'shared/form_edit_show', object: @provider %>

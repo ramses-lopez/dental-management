@@ -1,6 +1,4 @@
-<h3><%= t('text.edit') + " " + Invoice.model_name.human %></h3>
-
+<%= render partial: 'shared/form_title', locals: {object: Invoice, action: 'edit'} %>
 <%= render 'form' %>
+<%= render 'shared/form_edit_show', object: @invoice %>
 
-<%= link_to t('text.show'), @invoice %> |
-<%= link_to t('text.back'), invoices_path %>

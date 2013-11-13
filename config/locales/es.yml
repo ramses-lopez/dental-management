@@ -226,6 +226,12 @@ es:
       item:
         label: Descripción
         stock: Existencia
+        minimum_stock: Existencia mínima
+      provider:
+        label: Nombre
+        phone: Teléfono
+        email: Correo Electrónico
+        website: Página Web
   text:
     add: Agregar
     back: Regresar

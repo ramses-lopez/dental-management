@@ -1,17 +1,24 @@
 <%= form_for(@provider) do |f| %>
-  <% if @provider.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@provider.errors.count, "error") %> prohibited this provider from being saved:</h2>
-
-      <ul>
-      <% @provider.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<%= render 'shared/error_messages', object: @provider %>
+	<div class="row">
+		<div class='span5'>
+			<%= f.label :label %>
+			<%= f.text_field :label %>
+		</div>
+		<div class='span5'>
+			<%= f.label :phone %>
+			<%= f.text_field :phone %>
+		</div>
+		<div class='span5'>
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+		</div>
+		<div class='span5'>
+			<%= f.label :website %>
+			<%= f.text_field :website %>
+		</div>
+	</div>
+	<div class="row text-center">
+		<%= f.submit t('text.save') + ' ' + Provider.model_name.human, class: 'btn btn-large' %>
+	</div>
 <% end %>

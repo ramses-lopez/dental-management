@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(version: 20131019225018) do
   end
 
   create_table "items", force: true do |t|
-    t.string   "label",                  null: false
-    t.integer  "stock",      default: 0, null: false
+    t.string   "label",                     null: false
+    t.integer  "stock",         default: 0, null: false
+    t.integer  "minimum_stock", default: 3
     t.integer  "active"
     t.datetime "created_at"
     t.datetime "updated_at"

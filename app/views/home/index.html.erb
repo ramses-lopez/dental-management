@@ -1,13 +1,26 @@
-<h3>To - Do</h3>
-<ol>
-	<li>Paginación</li>
-	<li>Pagina de actualizacion de inventario (actualizacion con textfield)</li>
-	<li>Cerrar sesiones por tiempo</li>
-	<li>Links de paginas a reportes</li>
-	<li>Ajustes de la interfaz de proveedores</li>
-	<li>Reportes
+<div class='row'>
+	<div class='span5'>
+		<h4>Productos mas utilizados</h4>
 		<ul>
-			<li>Materiales utilizados en el mes</li>
+			<% Item.all.limit(5).each do |item|%>
+				<li><%= "#{item.label} = #{item.stock}"%></li>
+			<% end %>
 		</ul>
-	</li>
-</ol>
+	</div>
+	<div class='span5'>
+		<h4>Productos próximos a vencerse</h4>
+		<ul>
+			<% Item.all.limit(5).each do |item|%>
+				<li><%= "#{item.label} = #{item.stock}"%></li>
+			<% end %>
+		</ul>
+	</div>
+	<div class='span5'>
+		<h4>Productos bajos en existencia</h4>
+		<ul>
+			<% Item.all.limit(5).each do |item|%>
+				<li><%= "#{item.label} = #{item.stock}"%></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
