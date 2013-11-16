@@ -1,6 +1,6 @@
 class TracesController < ApplicationController
 	def index
-		@traces = Trace.all
+		@traces = Trace.paginate(page: params[:page])
 	end
 
 	def filter

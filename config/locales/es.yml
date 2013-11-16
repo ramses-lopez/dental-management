@@ -243,4 +243,7 @@ es:
     save: Guardar
     session:
       must_sign_in: Debe ingresar a la aplicación
+  will_paginate:
+    next_label: "Siguiente >"
+    previous_label: "< Anterior"
 
