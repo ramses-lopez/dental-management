@@ -1,0 +1,28 @@
+<h3><%= t('text.update')%> de Inventario</h3>
+<%= form_for :item, url: {action: 'update_stock'} do %>
+	<div style='height: 400px; overflow-y: scroll; overflow-x: hidden;'>
+		<table class='table table-hover table-bordered table-condensed'>
+			<thead>
+				<tr>
+					<th>Material</th>
+					<th>En existencia</th>
+					<th>Nueva cantidad</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @items.each do |item| %>
+					<%= fields_for "item_ids[]", item do |item_fields| %>
+						<tr>
+							<%= item_fields.hidden_field :comment, value: 'Actualización de Inventario' %>
+							<td><%= item.label %></td>
+							<td><%= item.stock %></td>
+							<td><%= item_fields.text_field :new_quantity, value: item.stock, class: 'span1 number' %></td>
+						</tr>
+					<% end %>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<%= submit_tag "#{t('text.update')} Inventario" %>
+<% end %>
+

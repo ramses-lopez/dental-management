@@ -1,5 +1,3 @@
-<h1>New item</h1>
-
+<%= render partial: 'shared/form_title', locals: {object: Item, action: 'new'} %>
 <%= render 'form' %>
-
-<%= link_to 'Back', items_path %>
+<%= render 'shared/form_back', object: @item %>

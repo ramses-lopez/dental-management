@@ -9,6 +9,7 @@ DentoSpa::Application.routes.draw do
   	get "items/deliver" => "items#deliver"
   	get "items/update_inventory" => "items#update_inventory"
   	post "items/update_stock" => "items#update_stock"
+  	post "items/deliver_stock" => "items#deliver_stock"
 
   	match 'traces/filter' => 'traces#filter', via: [:get, :post]
 

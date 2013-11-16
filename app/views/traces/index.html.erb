@@ -26,8 +26,8 @@
 			<th>Material</th>
 			<th>Tipo</th>
 			<th>Cant.</th>
-			<th>Descripción</th>
 			<th>Usuario</th>
+			<th>Descripción</th>
 			<th>Fecha</th>
 		</tr>
 	</thead>
@@ -37,8 +37,8 @@
 			<td><%= trace.item.label %></td>
 			<td><i class="<%= trace.type == '+' ? 'icon-plus-sign' : 'icon-minus-sign' %>"></i></td>
 			<td><%= trace.value %></td>
-			<td><%= trace.comment %></td>
 			<td><%= trace.user.nil? ? '' : trace.user.name %></td>
+			<td><%= trace.comment %></td>
 			<td><%= trace.created_at.to_formatted_s(:short) %></td>
 		</tr>
 		<% end %>

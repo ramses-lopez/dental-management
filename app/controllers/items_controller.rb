@@ -69,7 +69,7 @@ class ItemsController < ApplicationController
 		@items = Item.all
 	end
 
-	def update_stock
+	def deliver_stock
 
 		items_to_update = Item.find params[:item_ids].keys
 		items_to_update.each do |item|
@@ -89,6 +89,26 @@ class ItemsController < ApplicationController
 		end
 
 		redirect_to items_deliver_path, notice: 'Inventario actualizado'
+	end
+
+	def update_stock
+
+		items_to_update = Item.find params[:item_ids].keys
+		items_to_update.each do |item|
+
+			comment = params[:item_ids][item.id.to_s]['comment']
+			new_quantity = params[:item_ids][item.id.to_s]['new_quantity'].to_i
+
+			unless  new_quantity == item.stock
+				item.stock = new_quantity
+				item.trace_comment = comment
+				item.trace_user = current_user.id
+				item.save
+			end
+		end
+
+		redirect_to items_update_inventory_path
+
 	end
 
 	private
