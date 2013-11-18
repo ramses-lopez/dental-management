@@ -32,7 +32,7 @@ class InvoiceItem < ActiveRecord::Base
 	end
 
 	def add_stock
-		self.item.comment = "Inserción de #{Item.model_name.human} #{self.item.label}"
+		self.item.trace_comment = "Inserción de #{Item.model_name.human} #{self.item.label}"
 		self.item.add_stock self.quantity
 		self.item.save!
 	end

@@ -7,6 +7,10 @@
 		<b><%= Item.human_attribute_name(:stock)%>: </b>
 		<%= @item.stock %>
 	</div>
+	<div class='span4'>
+		<b><%= Item.human_attribute_name(:minimum_stock)%>: </b>
+		<%= @item.minimum_stock %>
+	</div>
 </div>
 <br>
-<%= render 'shared/edit_show', object: @item %>
+<%= render 'shared/form_edit_show', object: @item %>

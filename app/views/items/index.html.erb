@@ -19,6 +19,9 @@
 			<% end %>
 		</tbody>
 	</table>
+	<div class='text-center'>
+		<%= will_paginate %>
+	</div>
 <% else %>
 	<%= render 'shared/no_records_found', object_class: Item %>
 <% end %>
