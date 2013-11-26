@@ -5,14 +5,28 @@
 		<thead>
 			<tr>
 				<th>Descripción</th>
+				<th>Existencia mínima</th>
 				<th>Existencia</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @items.each do |item| %>
-				<tr>
+
+				<%
+					row_class = case
+						when item.stock == 0
+							'error'
+						when item.stock < item.minimum_stock
+							'warning'
+						else
+							''
+						end
+				%>
+
+				<tr class='<%= row_class %>'>
 					<td><%= item.label %></td>
+					<td><%= item.minimum_stock %></td>
 					<td><%= item.stock %></td>
 					<td><%= render 'shared/btn_group_action', object: item %> </td>
 				</tr>
@@ -26,4 +40,4 @@
 	<%= render 'shared/no_records_found', object_class: Item %>
 <% end %>
 <br>
-<%= link_to "#{t('text.new')} #{Item.model_name.human}", new_item_path, class: 'btn' %>
+<%= render 'shared/form_new', object: Item %>

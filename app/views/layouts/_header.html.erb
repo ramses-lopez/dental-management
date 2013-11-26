@@ -13,15 +13,17 @@
 	</div>
 </div>
 
-<div class="navbar">
-	<div class="navbar-inner">
-		<ul class="nav">
-			<li class="<%= current_page?(invoices_path) ? 'active' : '' %>"><%= link_to 'Facturas', invoices_path %></li>
-			<li class="<%= current_page?(items_path) ? 'active' : '' %>"><%= link_to 'Materiales', items_path %></li>
-			<li class="<%= current_page?(providers_path) ? 'active' : '' %>"><%= link_to 'Proveedores', providers_path %></li>
-			<li class="<%= current_page?(items_deliver_path) ? 'active' : '' %>"><%= link_to 'Entrega de Materiales', items_deliver_path %></li>
-			<li class="<%= current_page?(items_update_inventory_path) ? 'active' : '' %>"><%= link_to 'Actualización de Inventario', items_update_inventory_path %></li>
-			<li class="<%= current_page?(traces_path) ? 'active' : '' %>"><%= link_to 'Registro de movimientos', traces_path %></li>
-		</ul>
+<% if signed_in? %>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<ul class="nav">
+				<li class="<%= current_page?(invoices_path) ? 'active' : '' %>"><%= link_to 'Facturas', invoices_path %></li>
+				<li class="<%= current_page?(items_path) ? 'active' : '' %>"><%= link_to 'Materiales', items_path %></li>
+				<li class="<%= current_page?(providers_path) ? 'active' : '' %>"><%= link_to 'Proveedores', providers_path %></li>
+				<li class="<%= current_page?(items_deliver_path) ? 'active' : '' %>"><%= link_to 'Entrega de Materiales', items_deliver_path %></li>
+				<li class="<%= current_page?(items_update_inventory_path) ? 'active' : '' %>"><%= link_to 'Actualización de Inventario', items_update_inventory_path %></li>
+				<li class="<%= current_page?(traces_path) ? 'active' : '' %>"><%= link_to 'Registro de movimientos', traces_path %></li>
+			</ul>
+		</div>
 	</div>
-</div>
+<% end %>

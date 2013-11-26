@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131019225018) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "invoice_items", force: true do |t|
     t.integer  "invoice_id",                                             null: false
     t.integer  "item_id",                                                null: false

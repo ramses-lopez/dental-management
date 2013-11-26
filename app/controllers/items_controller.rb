@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 
 		respond_to do |format|
 			if @item.save
-				format.html { redirect_to @item, notice: "#{Item.model_name.human} creado." }
+				format.html { redirect_to items_path, notice: "#{Item.model_name.human} creado." }
 				format.json { render action: 'show', status: :created, location: @item }
 			else
 				format.html { render action: 'new' }
@@ -41,8 +41,14 @@ class ItemsController < ApplicationController
 	# PATCH/PUT /items/1.json
 	def update
 		respond_to do |format|
+
+			unless  params[:item][:stock] == @item.stock
+				@item.trace_comment = 'Actualización directa'
+				@item.trace_user = current_user.id
+			end
+
 			if @item.update(item_params)
-				format.html { redirect_to @item, notice: "#{Item.model_name.human} actualizado." }
+				format.html { redirect_to items_path, notice: "#{Item.model_name.human} actualizado." }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
@@ -107,7 +113,7 @@ class ItemsController < ApplicationController
 			end
 		end
 
-		redirect_to items_update_inventory_path
+		redirect_to items_update_inventory_path, notice: 'Inventario actualizado'
 
 	end
 

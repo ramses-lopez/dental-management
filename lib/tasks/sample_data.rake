@@ -40,6 +40,7 @@ def create_items
 		item = Item.new(
 			label: Faker::Commerce.product_name,
 			stock: 0,
+			minimum_stock: rand(1..100),
 			active: rand(0..1)
 			)
 		item.save!
