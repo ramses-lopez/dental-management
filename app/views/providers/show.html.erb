@@ -1,4 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class='row'>
+	<div class='span4'>
+		<b><%= Provider.human_attribute_name(:label) %></b>
+		<%= @provider.label %>
+	</div>
+	<div class='span4'>
+		<b><%= Provider.human_attribute_name(:phone) %></b>
+		<%= @provider.phone %>
+	</div>
+	<div class='span4'>
+		<b><%= Provider.human_attribute_name(:email) %></b>
+		<%= mail_to @provider.email %>
+	</div>
+	<div class='span4'>
+		<b><%= Provider.human_attribute_name(:website) %></b>
+		<%= link_to @provider.website %>
+	</div>
+	<div class='span4'>
+		<b><%= Provider.human_attribute_name(:address) %></b>
+		<%= @provider.address %>
+	</div>
+</div>
+<br>
 
-<%= link_to 'Edit', edit_provider_path(@provider) %> |
-<%= link_to 'Back', providers_path %>
+<%= render 'shared/form_edit_show', object: @provider %>

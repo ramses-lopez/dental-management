@@ -26,8 +26,12 @@
 <% else %>
 	<%= render 'shared/no_records_found', object_class: Invoice %>
 <% end %>
-<br>
-<%= link_to "#{t('text.new')} #{Provider.model_name.human}", new_provider_path, class: 'btn' %>
+
+<%= render 'shared/paginate' %>
+
+<%= render 'shared/form_new', object: Provider %>
+
+
 
 
 

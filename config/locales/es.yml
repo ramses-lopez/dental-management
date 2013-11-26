@@ -232,6 +232,7 @@ es:
         phone: Teléfono
         email: Correo Electrónico
         website: Página Web
+        address: Dirección
   text:
     update: Actualizar
     add: Agregar
