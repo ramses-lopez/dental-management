@@ -24,7 +24,7 @@
 				%>
 
 				<tr class='<%= row_class %>'>
-					<td><%= item.label %></td>
+					<td><%= link_to item.label, item_path(item) %></td>
 					<td><%= item.minimum_stock %></td>
 					<td><%= item.stock %></td>
 					<td><%= render 'shared/btn_group_action', object: item %> </td>

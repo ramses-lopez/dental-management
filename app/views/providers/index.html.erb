@@ -14,7 +14,7 @@
 		<tbody>
 			<% @providers.each do |provider| %>
 				<tr>
-					<td><%= provider.label %></td>
+					<td><%= link_to provider.label, provider_path(provider) %></td>
 					<td><%= provider.phone %></td>
 					<td><%= mail_to provider.email %></td>
 					<td><%= link_to provider.website %></td>
