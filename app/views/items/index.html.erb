@@ -32,9 +32,7 @@
 			<% end %>
 		</tbody>
 	</table>
-	<div class='text-center'>
-		<%= will_paginate %>
-	</div>
+	<%= render 'shared/paginate', object: @items %>
 <% else %>
 	<%= render 'shared/no_records_found', object_class: Item %>
 <% end %>

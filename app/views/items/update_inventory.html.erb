@@ -1,6 +1,6 @@
 <h3><%= t('text.update')%> de Inventario</h3>
-<%= form_for :item, url: {action: 'update_stock'} do %>
-	<div style='height: 400px; overflow-y: scroll; overflow-x: hidden;'>
+<% if @items.size > 0 %>
+	<%= form_for :item, url: {action: 'update_stock'} do %>
 		<table class='table table-hover table-bordered table-condensed'>
 			<thead>
 				<tr>
@@ -22,7 +22,9 @@
 				<% end %>
 			</tbody>
 		</table>
-	</div>
-	<%= submit_tag "#{t('text.update')} Inventario" %>
+		<%= render 'shared/paginate', object: @items %>
+		<%= submit_tag "#{t('text.update')} Inventario" %>
+	<% end %>s
+<% else %>
+	<%= render 'shared/no_records_found', object_class: Item %>
 <% end %>
-

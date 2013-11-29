@@ -68,11 +68,11 @@ class ItemsController < ApplicationController
 	end
 
 	def deliver
-		@items = Item.in_stock
+		@items = Item.in_stock.paginate(page: params[:page])
 	end
 
 	def update_inventory
-		@items = Item.all
+		@items = Item.all.paginate(page: params[:page])
 	end
 
 	def deliver_stock

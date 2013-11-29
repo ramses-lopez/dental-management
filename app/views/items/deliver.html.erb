@@ -1,5 +1,4 @@
 <h3>Entrega de Materiales</h3>
-
 <% if @items.size > 0 %>
 	<%= form_for :item, url: {action: 'deliver_stock'} do %>
 		<table class='table table-hover table-bordered table-condensed'>
@@ -24,6 +23,7 @@
 				<% end %>
 			</tbody>
 		</table>
+		<%= render 'shared/paginate', object: @items %>
 		<%= submit_tag 'Registrar Entrega' %>
 	<% end %>
 <% else %>
