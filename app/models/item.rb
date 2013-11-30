@@ -13,6 +13,9 @@ class Item < ActiveRecord::Base
 	default_scope {order :label}
 
 	scope :in_stock, -> {where ('stock > 0')}
+	scope :under_minimum_stock, -> {where("stock <= minimum_stock and stock > 0")}
+
+	"select items.label, count(*) from traces inner join items on traces.item_id = items.id where traces.type = '-' group by items.label having count(*) > 1"
 
 	with_options presence: :true do |opt|
 		opt.validates :stock, numericality: { only_integer: true }

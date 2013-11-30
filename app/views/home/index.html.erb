@@ -18,8 +18,8 @@
 	<div class='span5'>
 		<h4><%= Item.model_name.human.pluralize(:es) %> bajos en existencia</h4>
 		<ul>
-			<% Item.all.limit(5).each do |item|%>
-				<li><%= "#{item.label} = #{item.stock}"%></li>
+			<% Item.under_minimum_stock.limit(10).each do |item|%>
+				<li><%= "#{item.label}: #{item.stock}"%> unidades</li>
 			<% end %>
 		</ul>
 	</div>
