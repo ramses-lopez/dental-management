@@ -1,5 +1,6 @@
 <tr class='invoice_item'>
 	<%= f.hidden_field :id %>
+	<%= f.hidden_field :trace_user, value: current_user.id %>
 	<td><%= f.select :item_id, grouped_options_for_select(get_grouped_options(Item.all), f.object.item_id), {prompt: true}, class: 'span4' %></td>
 	<td><%= f.text_field :quantity,  class: 'quantity span1 number' %></td>
 	<td><%= f.text_field :item_price,  class: 'item_price span2 number' %></td>

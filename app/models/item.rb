@@ -8,6 +8,8 @@ class Item < ActiveRecord::Base
 	#campos para tracing
 	attr_accessor :delta, :type, :trace_comment, :trace_user
 
+	validates :label, uniqueness: { case_sensitive: false }
+
 	default_scope {order :label}
 
 	scope :in_stock, -> {where ('stock > 0')}
@@ -44,7 +46,8 @@ class Item < ActiveRecord::Base
 		trace.user_id = self.trace_user
 		trace.value =  self.stock - self.stock_was
 		trace.type = trace.value >= 0 ? '+' : '-'
-		trace.save!
+
+		trace.save! unless trace.value == 0
 	end
 
 

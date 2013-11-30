@@ -8,11 +8,6 @@
 	</head>
 	<body class='container'>
 
-		<% if Rails.env == 'development' %>
-			<% deadline = Date.new(2013,11,30)%>
-			<h4 style="color: white; text-align: center">Entrega el: <%= "#{deadline} (#{(deadline - Date.today).to_i} días)" %></h4>
-		<% end %>
-
 		<div class='content'>
 			<% flash.each do |key, value| %>
 				<%= content_tag(:div, value, class: "alert alert-#{key}") %>

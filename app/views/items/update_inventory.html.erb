@@ -24,7 +24,7 @@
 		</table>
 		<%= render 'shared/paginate', object: @items %>
 		<%= submit_tag "#{t('text.update')} Inventario" %>
-	<% end %>s
+	<% end %>
 <% else %>
 	<%= render 'shared/no_records_found', object_class: Item %>
 <% end %>

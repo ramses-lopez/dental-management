@@ -55,7 +55,7 @@ class InvoicesController < ApplicationController
 	def update
 		respond_to do |format|
 			if @invoice.update(invoice_params)
-				format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
+				format.html { redirect_to @invoice, notice: "#{Invoice.model_name.human} actualizada" }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
@@ -87,6 +87,6 @@ class InvoicesController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def invoice_params
 		params.require(:invoice).permit(:provider_id, :number, :date, :tax, :total,
-			invoice_items_attributes: [:id, :item_id, :quantity, :item_price, :batch_number, :expiration_date, :_destroy])
+			invoice_items_attributes: [:id, :item_id, :quantity, :item_price, :batch_number, :expiration_date, :_destroy, :trace_comment, :trace_user])
 	end
 end
