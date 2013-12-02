@@ -1,51 +1,35 @@
 <h3>Registro de Movimientos</h3>
-<% form_for :trace, url: {action: 'filter'} do |f|%>
-	<div class='row'>
-		<div class='span4'>
-			<%= f.label :user_id %>
-			<%= f.select :user_id, options_for_select(User.all.map {|u| [u.name, u.id]}), {prompt: true}, class: 'span4' %>
-			<%= f.label :from %>
-			<%= f.text_field :from, class: 'datepicker span4' %>
-		</div>
-		<div class='span4'>
-			<%= f.label :item_id %>
-			<%= f.select :item_id, grouped_options_for_select(get_grouped_options(Item.all)), {prompt: true}, class: 'span4' %>
-			<%= f.label :until %>
-			<%= f.text_field :until, class: 'datepicker span4' %>
-		</div>
+
+<%= render 'filter' %>
+
+<% if @traces.size > 0 %>
+	<table class='table table-condensed table-hover table-bordered'>
+		<thead>
+			<tr>
+				<th>Material</th>
+				<th>Tipo</th>
+				<th>Cant.</th>
+				<th>Usuario</th>
+				<th>Descripción</th>
+				<th>Fecha</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @traces.each do |trace| %>
+			<tr class="<%= trace.type == '+' ? 'success' : 'error' %>">
+				<td><%= trace.item.label %></td>
+				<td><i class="<%= trace.type == '+' ? 'icon-plus-sign' : 'icon-minus-sign' %>"></i></td>
+				<td><%= trace.value %></td>
+				<td><%= trace.user.nil? ? '' : trace.user.name %></td>
+				<td><%= trace.comment %></td>
+				<td><%= trace.created_at.to_formatted_s(:short) %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<div class="text-center">
+		<%= will_paginate %>
 	</div>
-	<div class="row">
-		<div class='span2'>
-			<%= f.submit :filter, class: 'btn'%>
-		</div>
-	</div>
+<% else %>
+	<%= render 'shared/no_records_found', object_class: Trace %>
 <% end %>
-
-<table class='table table-condensed table-hover table-bordered'>
-	<thead>
-		<tr>
-			<th>Material</th>
-			<th>Tipo</th>
-			<th>Cant.</th>
-			<th>Usuario</th>
-			<th>Descripción</th>
-			<th>Fecha</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @traces.each do |trace| %>
-		<tr class="<%= trace.type == '+' ? 'success' : 'error' %>">
-			<td><%= trace.item.label %></td>
-			<td><i class="<%= trace.type == '+' ? 'icon-plus-sign' : 'icon-minus-sign' %>"></i></td>
-			<td><%= trace.value %></td>
-			<td><%= trace.user.nil? ? '' : trace.user.name %></td>
-			<td><%= trace.comment %></td>
-			<td><%= trace.created_at.to_formatted_s(:short) %></td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
-
-<div class="text-center">
-	<%= will_paginate %>
-</div>

@@ -1,7 +1,7 @@
 <div class='well'>
 	<h3>To - Do</h3>
 	<ol>
-		<li>Registro de movimientos
+		<li><strike>Registro de movimientos
 			<ul>
 				<li>filtros
 					<ul>
@@ -10,7 +10,7 @@
 						<li>Por Fecha</li>
 					</ul>
 				</li>
-			</ul>
+			</ul></strike>
 		</li>
 
 		<li>javascript para inventario y deliver, que cambie de color el row segun el minimum_stock</li>
@@ -37,9 +37,28 @@
 		<li>Eliminación logica de registros</li>
 		<li>Reportes
 			<ul>
-				<li>Materiales utilizados en el mes</li>
-				<li>Productos por acabarse</li>
-				<li>Productos por vencerse</li>
+				<li>Materiales utilizados en el mes
+				<ul>
+					<li>select items.label, count(*) from traces inner join items on traces.item_id = items.id where traces.type = '-' group by items.label order by count(*) desc</li>
+				</ul>
+				</li>
+				<li>Productos por acabarse
+				<ul>
+					<li>listo, falta hacer página de reporte</li>
+				</ul>
+				</li>
+				<li>Productos por vencerse
+					<ul>
+						<li>falta hacer la separacion por lote de los materiales</li>
+					</ul>
+				</li>
+				<li>Productos por comprados a proveedor
+				<ul>
+					<li>
+						select items.label, invoice_items.item_price, invoice_items.created_at from invoice_items inner join invoices on invoices.id = invoice_items.invoice_id inner join items on invoice_items.item_id = items.id where invoices.provider_id = 1 order by 1;
+					</li>
+				</ul>
+				</li>
 			</ul>
 		</li>
 	</ol>
