@@ -1,22 +1,25 @@
-<div class='login-box text-center'>
+<div class='login-box well span3'>
 	<%= form_tag sessions_path do %>
 		<h3>Inicio de Sesión</h3>
 		<div class='row'>
-			<div class='span12'>
+			<div class='span4'>
 				<%= label_tag :username, 'Usuario' %>
 				<%= text_field_tag :username, params[:username] %>
 			</div>
 		</div>
 		<div class='row'>
-			<div class='span12'>
+			<div class='span4'>
 				<%= label_tag :password, 'Contraseña' %>
 				<%= password_field_tag :password %>
 			</div>
 		</div>
 		<div class='row'>
-			<div class="span12 text-center">
+			<div class="span4">
 				<%= submit_tag 'Ingresar', class: 'btn' %>
 			</div>
 		</div>
 	<% end %>
+</div>
+<div class='row'>
+	<h4 class='text-center'><%= link_to 'Ver estado del inventario', items_current_stock_path %></h4>
 </div>

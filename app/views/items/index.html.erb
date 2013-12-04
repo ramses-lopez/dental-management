@@ -23,7 +23,7 @@
 						end
 				%>
 
-				<tr class='<%= row_class %>'>
+				<tr class='<%= stock_level_class(item) %>'>
 					<td><%= link_to item.label, item_path(item) %></td>
 					<td><%= item.minimum_stock %></td>
 					<td><%= item.stock %></td>

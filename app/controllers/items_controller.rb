@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+
+	skip_before_action :signed_in_user, only: [:current_stock]
+
 	before_action :set_item, only: [:show, :edit, :update, :destroy]
 
 	# GET /items
@@ -114,8 +117,18 @@ class ItemsController < ApplicationController
 		end
 
 		redirect_to items_update_inventory_path, notice: 'Inventario actualizado'
-
 	end
+
+
+	# ********************* reportes ****************************
+	def current_stock
+		@items = Item.in_stock
+	end
+
+	def under_minimum_stock
+		@items = Item.under_minimum_stock
+	end
+
 
 	private
 		# Use callbacks to share common setup or constraints between actions.

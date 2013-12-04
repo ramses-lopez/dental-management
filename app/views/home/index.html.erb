@@ -23,4 +23,12 @@
 			<% end %>
 		</ul>
 	</div>
+	<div class='span5'>
+		<h4>Últimas compras a <%= Provider.model_name.human.pluralize(:es) %></h4>
+		<ul>
+			<% Item.under_minimum_stock.limit(10).each do |item|%>
+				<li><%= "#{item.label}: #{item.stock}"%> unidades</li>
+			<% end %>
+		</ul>
+	</div>
 </div>

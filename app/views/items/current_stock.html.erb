@@ -1,0 +1,24 @@
+<h3><%= Item.model_name.human.pluralize(:es) %> en existencia</h3>
+<% if @items.size > 0 %>
+	<table class='table table-condensed table-hover table-bordered'>
+		<thead>
+			<tr>
+				<th>Descripción</th>
+				<th>Existencia</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @items.each do |item| %>
+				<tr class='<%= stock_level_class(item) %>'>
+					<td><%= item.label %></td>
+					<td><%= item.stock %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<%#= render 'shared/paginate', object: @items %>
+<% else %>
+	<%= render 'shared/no_records_found', object_class: Item %>
+<% end %>
+<br>
+<%= render 'legend' %>

@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
 	has_many :invoices, through: :invoice_items
 	has_many :traces
 
-	after_save :add_trace #, unless: :new_record?
+	after_save :add_trace
 
 	#campos para tracing
 	attr_accessor :delta, :type, :trace_comment, :trace_user
@@ -14,10 +14,6 @@ class Item < ActiveRecord::Base
 
 	scope :in_stock, -> {where ('stock > 0')}
 	scope :under_minimum_stock, -> {where("stock <= minimum_stock and stock > 0")}
-
-	#select items.label, count(*) from traces inner join items on traces.item_id = items.id where traces.type = '-' group by items.label having count(*) > 1
-
-	#select items.label, count(*) from traces inner join items on traces.item_id = items.id where traces.type = '-' group by items.label order by count(*) desc
 
 	with_options presence: :true do |opt|
 		opt.validates :stock, numericality: { only_integer: true }
