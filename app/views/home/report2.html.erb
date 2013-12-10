@@ -1,0 +1,25 @@
+<%= render 'shared/back_btn'%>
+<% if @invoice_items.size > 0 %>
+	<h3><%= @invoice_items.first.item.label%> comprados </h3>
+	<table class='table table-condensed table-hover table-bordered'>
+		<thead>
+			<tr>
+				<th>Proveedor</th>
+				<th>Precio</th>
+				<th>Comprado el</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @invoice_items.each do |invoice_item| %>
+				<tr>
+					<td><%= link_to invoice_item.invoice.provider.label, home_report1_path(provider_id: invoice_item.invoice.provider.id) %></td>
+					<td><%= invoice_item.item_price %></td>
+					<td><%= invoice_item.invoice.updated_at.to_formatted_s(:short) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<%= render 'shared/no_records_found', object_class: Item %>
+<% end %>
+

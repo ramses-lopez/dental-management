@@ -22,6 +22,9 @@ DentoSpa::Application.routes.draw do
 	resources :traces
 
 	get "home/index"
+	get "home/report1"
+	get "home/report2"
+
 	root 'sessions#new'
 
 	# The priority is based upon order of creation: first created -> highest priority.

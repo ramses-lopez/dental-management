@@ -52,13 +52,14 @@
 						<li>falta hacer la separacion por lote de los materiales</li>
 					</ul>
 				</li>
-				<li>Productos por comprados a proveedor
-				<ul>
-					<li>
-						select items.label, invoice_items.item_price, invoice_items.created_at from invoice_items inner join invoices on invoices.id = invoice_items.invoice_id inner join items on invoice_items.item_id = items.id where invoices.provider_id = 1 order by 1;
-					</li>
-				</ul>
+				<li><strike>Productos por comprados a proveedor
+					<ul>
+						<li>
+							select items.label, invoice_items.item_price, invoice_items.created_at from invoice_items inner join invoices on invoices.id = invoice_items.invoice_id inner join items on invoice_items.item_id = items.id where invoices.provider_id = 1 order by 1;
+						</li>
+					</ul></strike>
 				</li>
+				<li><strike> Productos comprados a proveedor</strike></li>
 			</ul>
 		</li>
 	</ol>

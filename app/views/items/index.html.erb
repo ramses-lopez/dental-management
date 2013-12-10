@@ -11,18 +11,6 @@
 		</thead>
 		<tbody>
 			<% @items.each do |item| %>
-
-				<%
-					row_class = case
-						when item.stock == 0
-							'error'
-						when item.stock < item.minimum_stock
-							'warning'
-						else
-							''
-						end
-				%>
-
 				<tr class='<%= stock_level_class(item) %>'>
 					<td><%= link_to item.label, item_path(item) %></td>
 					<td><%= item.minimum_stock %></td>
