@@ -122,11 +122,27 @@ class ItemsController < ApplicationController
 
 	# ********************* reportes ****************************
 	def current_stock
-		@items = Item.in_stock
+		@items = Item.in_stock.paginate(page: params[:page])
 	end
 
 	def under_minimum_stock
-		@items = Item.under_minimum_stock
+		@items = Item.under_minimum_stock.paginate(page: params[:page])
+	end
+
+	def by_provider
+		if params[:provider_id]
+			@invoice_items = InvoiceItem.joins(:invoice).where("invoices.provider_id = ?", params[:provider_id]).paginate(page: params[:page])
+		else
+			@invoice_items = nil
+		end
+	end
+
+	def by_item
+		if params[:item_id]
+			@invoice_items = InvoiceItem.joins(invoice: :provider).where("invoice_items.item_id = ?", params[:item_id]).paginate(page: params[:page])
+		else
+			@invoice_items = nil
+		end
 	end
 
 

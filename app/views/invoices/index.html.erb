@@ -1,4 +1,4 @@
-<h3>Listado de <%= Invoice.model_name.human.pluralize %></h3>
+<%= render 'shared/infobox', message: "Las #{Invoice.model_name.human.pluralize(:es)} permiten ingresar #{Item.model_name.human.pluralize(:es)} al inventario, registrar el #{Provider.model_name.human}, entre otros datos. "%>
 <% if @invoices.size > 0 %>
 	<table class='table table-hover table-condensed table-bordered'>
 		<thead>

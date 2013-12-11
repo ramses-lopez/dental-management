@@ -15,8 +15,8 @@ ActiveRecord::Base.transaction do
 
 	clear_and_reset('Role')
 	Role.create!([
-		{ name: "Administrador"},
-		{ name: "Encargado"}
+		{ name: "administrador"},
+		{ name: "manager"}
 	])
 
 end

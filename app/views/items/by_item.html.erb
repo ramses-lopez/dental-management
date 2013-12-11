@@ -12,7 +12,7 @@
 		<tbody>
 			<% @invoice_items.each do |invoice_item| %>
 				<tr>
-					<td><%= link_to invoice_item.invoice.provider.label, home_report1_path(provider_id: invoice_item.invoice.provider.id) %></td>
+					<td><%= link_to invoice_item.invoice.provider.label, item_by_provider_path(provider_id: invoice_item.invoice.provider.id) %></td>
 					<td><%= invoice_item.item_price %></td>
 					<td><%= invoice_item.invoice.updated_at.to_formatted_s(:short) %></td>
 				</tr>

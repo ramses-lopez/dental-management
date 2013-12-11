@@ -1,34 +1,4 @@
-<div class='row'>
-	<div class='span5'>
-		<h4><%= Item.model_name.human.pluralize(:es) %> mas utilizados</h4>
-		<ul>
-			<% Item.all.limit(5).each do |item|%>
-				<li><%= "#{item.label} = #{item.stock}"%></li>
-			<% end %>
-		</ul>
-	</div>
-	<div class='span5'>
-		<h4><%= Item.model_name.human.pluralize(:es) %> próximos a vencerse</h4>
-		<ul>
-			<% Item.all.limit(5).each do |item|%>
-				<li><%= "#{item.label} = #{item.stock}"%></li>
-			<% end %>
-		</ul>
-	</div>
-	<div class='span5'>
-		<h4><%= Item.model_name.human.pluralize(:es) %> bajos en existencia</h4>
-		<ul>
-			<% Item.under_minimum_stock.limit(10).each do |item|%>
-				<li><%= "#{item.label}: #{item.stock}"%> unidades</li>
-			<% end %>
-		</ul>
-	</div>
-	<div class='span5'>
-		<h4>Últimas compras a <%= Provider.model_name.human.pluralize(:es) %></h4>
-		<ul>
-			<% Item.under_minimum_stock.limit(10).each do |item|%>
-				<li><%= "#{item.label}: #{item.stock}"%> unidades</li>
-			<% end %>
-		</ul>
-	</div>
+<div class='row' style="height: 300px; padding-top: 20%">
+	<h1>Dento Spa Láser</h1>
+	<h2>Control de Inventario</h2>
 </div>

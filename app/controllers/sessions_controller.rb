@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
 		user = User.authenticate(params[:username], params[:password])
 		if user
 			session[:user_id] = user.id
+			session[:role_id] = user.role_id
 			redirect_to home_index_path, notice: "Bienvenido #{current_user.name}"
 		else
 			flash.now.alert = 'Usuario o contraseña incorrecta'

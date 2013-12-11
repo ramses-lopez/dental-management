@@ -1,10 +1,11 @@
-<h3>Existencia de <%= Item.model_name.human.pluralize(:es) %></h3>
-<%= render 'shared/infobox', message: "Número de unidades de cada #{Item.model_name.human} existentes en inventario" %>
+<h3><%= Item.model_name.human.pluralize(:es) %> próximos a agotarse</h3>
+<%= render 'shared/infobox', message: "#{Item.model_name.human.pluralize(:es)} cuyo stock se encuentra por debajo del mínimo deseado" %>
 <% if @items.size > 0 %>
 	<table class='table table-condensed table-hover table-bordered'>
 		<thead>
 			<tr>
 				<th>Descripción</th>
+				<th>Existencia mínima</th>
 				<th>Existencia</th>
 			</tr>
 		</thead>
@@ -12,6 +13,7 @@
 			<% @items.each do |item| %>
 				<tr class='<%= stock_level_class(item) %>'>
 					<td><%= item.label %></td>
+					<td><%= item.minimum_stock %></td>
 					<td><%= item.stock %></td>
 				</tr>
 			<% end %>

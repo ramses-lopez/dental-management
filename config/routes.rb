@@ -11,6 +11,9 @@ DentoSpa::Application.routes.draw do
   	get 'items/current_stock' => 'items#current_stock'
   	post "items/update_stock" => "items#update_stock"
   	post "items/deliver_stock" => "items#deliver_stock"
+  	get "items/by_provider"
+	get "items/by_item"
+	get "items/under_minimum_stock"
 
   	match 'traces/filter' => 'traces#filter', via: [:get, :post]
 
@@ -22,8 +25,6 @@ DentoSpa::Application.routes.draw do
 	resources :traces
 
 	get "home/index"
-	get "home/report1"
-	get "home/report2"
 
 	root 'sessions#new'
 
