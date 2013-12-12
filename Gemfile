@@ -48,7 +48,8 @@ gem 'debugger', group: [:development, :test]
 # Authorization
 gem 'cancan'
 
-gem 'faker', group: :development
+gem 'faker'
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
