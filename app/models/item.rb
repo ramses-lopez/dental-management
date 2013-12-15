@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
 	has_many :invoices, through: :invoice_items
 	has_many :traces
 
-	#before_save lambda{self.label.upcase!}
+	before_save lambda{self.label.upcase!}
 	after_save :add_trace
 
 	#campos para tracing
