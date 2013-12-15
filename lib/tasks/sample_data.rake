@@ -3,7 +3,7 @@ namespace :db do
 	task populate: :environment do
 		reset_db if Rails.env.development?
 		ActiveRecord::Base.transaction do
-			create_items
+			#create_items
 			create_providers
 			create_users
 			create_invoices
