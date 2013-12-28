@@ -11,6 +11,8 @@ class InvoiceItem < ActiveRecord::Base
 
 		comment = "Actualización Factura #{self.invoice.number}"
 
+		#TODO: grabar el item tomando en cuenta el numero de lote, para porder considerar la fecha de vencimiento
+
 		if self.item_id_changed?
 
 			old_item = Item.find self.item_id_was
