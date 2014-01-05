@@ -1,6 +1,7 @@
 class CreateInvoiceItems < ActiveRecord::Migration
   def change
     create_table :invoice_items do |t|
+    	t.integer :batch_id
 		t.integer :invoice_id, null: false
 		t.integer :item_id, null: false
 		t.integer :quantity, null: false, default: 1

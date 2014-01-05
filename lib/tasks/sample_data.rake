@@ -53,7 +53,6 @@ def create_items
 	200.times do
 		item = Item.new(
 			label: Faker::Commerce.product_name,
-			stock: 0,  #rand(1..100),
 			minimum_stock: rand(1..20),
 			active: 1 #rand(0..1)
 			)
@@ -79,7 +78,7 @@ end
 
 def create_invoices
 
-	10.times do
+	5.times do
 		invoice = Invoice.new(provider_id: Provider.all.sample.id,
 			number: Faker::Code.isbn,
 			date: Time.now)
@@ -96,12 +95,14 @@ def create_invoice_item
 
 	InvoiceItem.new(
 		trace_user: 1,
+		trace_comment: 'Sample data',
 		item_id: Item.all.sample.id,
-		quantity: rand(1..100),
+		quantity: rand(0..100),
 		item_price: rand(100..1000),
-		batch_number: rand(1000..20000)
+		batch_number: rand(1000..20000),
+		#manufacturing_date: Time.now - rand(1..18).months,
+		expiration_date: Time.now + rand(-6..18).months
 		)
-
 
 end
 

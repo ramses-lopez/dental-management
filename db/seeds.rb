@@ -28,7 +28,6 @@ ActiveRecord::Base.transaction do
 		{ label: "Ácido"},
 		{ label: "Acrilico Líquido"},
 		{ label: "Acrilico Polvo"},
-		{ label: "Acrílico líquido"},
 		{ label: "Agua oxigenada"},
 		{ label: "Agujas cortas"},
 		{ label: "Agujas de irrigación"},
@@ -160,9 +159,5 @@ ActiveRecord::Base.transaction do
 		{ label: "Yeso ortodoncia"},
 		{ label: "Yeso Rosado "},
 	])
-
-
-
-
 
 end

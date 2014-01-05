@@ -11,12 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019225018) do
+ActiveRecord::Schema.define(version: 20131230224753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "batches", force: true do |t|
+    t.integer  "item_id"
+    t.string   "batch_number"
+    t.date     "manufacturing_date"
+    t.date     "expiration_date"
+    t.integer  "stock",              default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "batches", ["item_id", "batch_number"], name: "index_batches_on_item_id_and_batch_number", unique: true, using: :btree
+
   create_table "invoice_items", force: true do |t|
+    t.integer  "batch_id"
     t.integer  "invoice_id",                                             null: false
     t.integer  "item_id",                                                null: false
     t.integer  "quantity",                                 default: 1,   null: false
@@ -37,8 +50,7 @@ ActiveRecord::Schema.define(version: 20131019225018) do
 
   create_table "items", force: true do |t|
     t.string   "label",                     null: false
-    t.integer  "stock",         default: 0, null: false
-    t.integer  "minimum_stock", default: 3
+    t.integer  "minimum_stock", default: 1
     t.integer  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,7 +74,7 @@ ActiveRecord::Schema.define(version: 20131019225018) do
 
   create_table "traces", force: true do |t|
     t.integer  "user_id"
-    t.integer  "item_id"
+    t.integer  "batch_id"
     t.integer  "value"
     t.string   "type"
     t.string   "comment"

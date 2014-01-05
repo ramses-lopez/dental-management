@@ -41,7 +41,7 @@ class InvoicesController < ApplicationController
 		@invoice = Invoice.new(invoice_params)
 		respond_to do |format|
 			if @invoice.save
-				format.html { redirect_to @invoice, success: 'Factura creada' }
+				format.html { redirect_to @invoice, flash: {success: 'Factura creada'} }
 				format.json { render action: 'show', status: :created, location: @invoice }
 			else
 				format.html { render action: 'new' }
@@ -55,7 +55,7 @@ class InvoicesController < ApplicationController
 	def update
 		respond_to do |format|
 			if @invoice.update(invoice_params)
-				format.html { redirect_to @invoice, notice: "#{Invoice.model_name.human} actualizada" }
+				format.html { redirect_to @invoice, flash: {success: "#{Invoice.model_name.human} actualizada"} }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }

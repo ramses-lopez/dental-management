@@ -1,16 +1,16 @@
 class Trace < ActiveRecord::Base
 	self.inheritance_column = nil
 
-	belongs_to :item
+	belongs_to :batch
 	belongs_to :user
 
 	default_scope {order "created_at desc"}
 
+	#TODO: Corregir consultas, adaptarlas para usar batches
 	scope :by_item_id, ->(item_id) {where(item_id: item_id)}
 	scope :by_user_id, ->(user_id) {where(user_id: user_id)}
 
 	def self.within(start_date, end_date)
-
 		start_date = DateTime.parse(start_date)
 		end_date = DateTime.parse(end_date).end_of_day
 

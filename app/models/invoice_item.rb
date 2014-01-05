@@ -1,46 +1,56 @@
 class InvoiceItem < ActiveRecord::Base
+
 	belongs_to :invoice
+	belongs_to :batch
 	belongs_to :item
 
 	attr_accessor :trace_comment, :trace_user
 
-	before_save :update_stock, unless: :new_record?
-	before_save :add_stock, if: :new_record?
+	before_save lambda{new_record? ? create_invoice_item : update_invoice_item}
 
-	def update_stock
-
-		comment = "Actualización Factura #{self.invoice.number}"
-
-		#TODO: grabar el item tomando en cuenta el numero de lote, para porder considerar la fecha de vencimiento
-
-		if self.item_id_changed?
-
-			old_item = Item.find self.item_id_was
-			old_item.remove_stock self.quantity_was
-			old_item.trace_comment = comment
-			old_item.save!
-
-			self.item.add_stock self.quantity
-
-		elsif self.quantity_changed?
-			self.item.remove_stock self.quantity_was
-			self.item.add_stock self.quantity
-
-		elsif self.destroyed?
-			self.item.remove_stock self.quantity
+	def create_invoice_item
+		self.batch = Batch.where(item_id: self.item_id, batch_number: self.batch_number.to_s).first_or_create do |_b|
+			_b.item_id = self.item_id
+			_b.batch_number = self.batch_number
+			_b.expiration_date = self.expiration_date
+			_b.stock += self.quantity
 		end
-
-		self.item.trace_user = trace_user
-		self.item.trace_comment = comment
-		self.item.save!
-
 	end
 
-	def add_stock
-		self.item.trace_comment =  self.trace_comment.blank? ? "Inserción de #{Item.model_name.human} #{self.item.label}" : self.trace_comment
-		self.item.trace_user = self.trace_user
-		self.item.add_stock self.quantity
-		self.item.save!
+	def update_invoice_item
+		batch = self.batch
+		batch.expiration_date = self.expiration_date
+		comment = "Actualización de factura #{self.invoice.number}"
+
+		case
+			when self.batch_number_changed?
+				#TODO: Se estan grabando dos traces en este caso, revisar
+				#cuando cambia el numero de lote, se debe restar el monto del numero de lote actual, y sumarlo al lote nuevo
+				batch.remove_stock(self.quantity_was)
+				batch.trace_comment = comment
+				batch.save
+
+				batch.destroy if batch.stock == 0
+
+				new_batch = Batch.where(item_id: self.item_id, batch_number: self.batch_number.to_s).first_or_create
+				new_batch.item_id = self.item_id
+				new_batch.batch_number = self.batch_number
+				new_batch.expiration_date = self.expiration_date
+				new_batch.trace_comment = comment
+				new_batch.stock += self.quantity
+				self.batch = new_batch
+				new_batch.save
+
+			when self.quantity_changed?
+				batch.remove_stock(self.quantity_was)
+				batch.trace_comment = comment
+				batch.add_stock(self.quantity)
+				batch.save
+
+			when self.destroyed?
+				batch.remove_stock(self.quantity)
+				batch.save
+		end
 	end
 
 end
