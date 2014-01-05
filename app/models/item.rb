@@ -10,4 +10,8 @@ class Item < ActiveRecord::Base
 		opt.validates :label
 	end
 
+	def stock
+		self.batches.nil? ? 0 : self.batches.sum(:stock)
+	end
+
 end

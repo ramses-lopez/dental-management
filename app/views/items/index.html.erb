@@ -5,16 +5,31 @@
 			<tr>
 				<th>Descripción</th>
 				<th>Existencia mínima</th>
-				<th>Existencia</th>
+				<th>Existencia por lotes</th>
+				<th>Total</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @items.each do |item| %>
-				<tr class='<%= stock_level_class(item) %>'>
+				<tr class=''>
 					<td><%= link_to item.label, item_path(item) %></td>
-					<td><%= item.minimum_stock %></td>
-					<td><%= item.stock %></td>
+					<td><%= units_to_words(item.minimum_stock) %></td>
+					<td class='item-stock <%= stock_level_class(item) %>'>
+						<div>
+							<ul>
+								<% unless item.stock == 0 %>
+									<% item.batches.each do |batch|%>
+										<li>Lote <%= batch.batch_number%>: <%= units_to_words(batch.stock) %><%= ", expira: #{batch.expiration_date.to_formatted_s(:short_date)}" unless batch.expiration_date.nil? %>
+										</li>
+									<% end %>
+								<% end %>
+							</ul>
+						</div>
+					</td>
+					<td>
+						<%= units_to_words(item.stock) %>
+					</td>
 					<td><%= render 'shared/btn_group_action', object: item %> </td>
 				</tr>
 			<% end %>

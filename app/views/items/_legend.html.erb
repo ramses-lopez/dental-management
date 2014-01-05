@@ -2,9 +2,9 @@
 	<div class='span3 pull-right'>
 		<table class='table table-condensed table-bordered'>
 			<tr><th>Leyenda</th></tr>
-			<tr class='<%= stock_level_class(Item.new(stock:100, minimum_stock: 1))%>'><td>Normal</td></tr>
-			<tr class='<%= stock_level_class(Item.new(stock:25, minimum_stock: 50))%>'><td>Por debajo del nivel mínimo</td></tr>
-			<tr class='<%= stock_level_class(Item.new(stock:0, minimum_stock: 50))%>'><td>Agotado</td></tr>
+			<tr class=''><td>Normal</td></tr>
+			<tr class='warning'><td>Por debajo del nivel mínimo</td></tr>
+			<tr class='error'><td>Agotado</td></tr>
 		</table>
 	</div>
 </div>
