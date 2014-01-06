@@ -31,9 +31,9 @@ input.number, input.date
     text-align:right;
 }
 
-.navbar
+.container
 {
-	margin: 10px 0px
+	margin-top: 40px;
 }
 
 .header
@@ -50,8 +50,8 @@ input.number, input.date
 
 .content
 {
-	@include border-radius(5px);
-	margin: 10px 0px;
+	@include border-bottom-radius(5px);
+	//margin: 10px 0px;
 	padding: 10px 10px;
 	background-color: #ffffff;
 }

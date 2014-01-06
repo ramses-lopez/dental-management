@@ -6,7 +6,6 @@ class Trace < ActiveRecord::Base
 
 	default_scope {order "traces.created_at desc"}
 
-	#TODO: Corregir consultas, adaptarlas para usar batches
 	scope :by_item_id, ->(item_id) {joins(:batch).where("batches.item_id = ?", item_id)}
 	scope :by_user_id, ->(user_id) {where(user_id: user_id)}
 
@@ -16,5 +15,4 @@ class Trace < ActiveRecord::Base
 
     	where(created_at: start_date..end_date)
   	end
-
 end

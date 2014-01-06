@@ -39,7 +39,6 @@
 	<div class='row text-center'>
 		<%= link_to_add_fields "<i class='icon-plus'></i> #{t 'text.add'} #{InvoiceItem.model_name.human}".html_safe, f, :invoice_items, 'btn' %>
 	</div>
-
 	<div class='row text-right'>
 		<div class='span11'>
 			<p><b>Subtotal:</b> Bs. <span id='subtotal'>0</span></p>
@@ -47,7 +46,6 @@
 			<p><b>Total:</b> Bs. <span id='total'>0</span></p>
 		</div>
 	</div>
-
 	<div class="row text-center">
 		<%= f.submit t('text.save') + ' ' + Invoice.model_name.human, class: 'btn btn-large' %>
 	</div>

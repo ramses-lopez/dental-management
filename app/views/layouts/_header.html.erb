@@ -14,37 +14,3 @@
 		</h6>
 	</div>
 </div>
-<% if signed_in? %>
-	<div class="navbar">
-		<div class="navbar-inner">
-			<ul class="nav">
-				<%= link_to 'Inicio', home_index_path, class: 'brand' %>
-				<li class="<%= current_page?(items_deliver_path) ? 'active' : '' %>"><%= link_to 'Entrega de Materiales', items_deliver_path %></li>
-				<li class="<%= current_page?(invoices_path) ? 'active' : '' %>"><%= link_to 'Facturas', invoices_path %>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						Reportes <span class="caret"></span>
-					</a>
-
-					<ul class="dropdown-menu">
-						<li><%= link_to "Existencia de #{Item.model_name.human.pluralize(:es)}", items_current_stock_path %></li>
-						<li><%= link_to "#{Item.model_name.human.pluralize(:es)} próximos a agotarse", items_under_minimum_stock_path %></li>
-						<% if current_role.admin? %>
-							<li><%= link_to 'Registro de movimientos', traces_path %></li>
-						<% end %>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						Mantenimiento <span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><%= link_to 'Actualización de Inventario', items_update_inventory_path %></li>
-						<li><%= link_to 'Materiales', items_path %></li>
-						<li><%= link_to 'Proveedores', providers_path %></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-<% end %>

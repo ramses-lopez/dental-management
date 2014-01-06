@@ -71,62 +71,56 @@ class ItemsController < ApplicationController
 	end
 
 	def deliver
-		@items = Item.in_stock.paginate(page: params[:page])
-	end
-
-	def update_inventory
-		@items = Item.all.paginate(page: params[:page])
+		@batches = Batch.joins(:item).includes(:item).in_stock.order("items.label").paginate(page: params[:page])
 	end
 
 	def deliver_stock
-
-		items_to_update = Item.find params[:item_ids].keys
-		items_to_update.each do |item|
-
-			type = params[:item_ids][item.id.to_s]['type']
-			comment = params[:item_ids][item.id.to_s]['comment']
-			delta = params[:item_ids][item.id.to_s]['delta'].to_i
+		batches_to_update = Batch.find params[:item_ids].keys
+		batches_to_update.each do |batch|
+			type = params[:item_ids][batch.id.to_s]['type']
+			comment = params[:item_ids][batch.id.to_s]['comment']
+			delta = params[:item_ids][batch.id.to_s]['delta'].to_i
 
 			if delta > 0
 				delta *= -1 if type == '-'
-				item.stock += delta
-				item.trace_comment = comment
-				item.trace_user = current_user.id
-				item.save
+				batch.stock += delta
+				batch.trace_comment = comment
+				batch.trace_user = current_user.id
+				batch.save
 			end
-
 		end
+		redirect_to items_deliver_path, flash: {success: 'Inventario actualizado'}
+	end
 
-		redirect_to items_deliver_path, notice: 'Inventario actualizado'
+	def update_inventory
+		@batches = Batch.joins(:item).includes(:item).order("items.label").paginate(page: params[:page])
 	end
 
 	def update_stock
+		batch_to_update = Batch.find params[:item_ids].keys
+		batch_to_update.each do |batch|
+			comment = params[:item_ids][batch.id.to_s]['comment']
+			new_quantity = params[:item_ids][batch.id.to_s]['new_quantity'].to_i
 
-		items_to_update = Item.find params[:item_ids].keys
-		items_to_update.each do |item|
-
-			comment = params[:item_ids][item.id.to_s]['comment']
-			new_quantity = params[:item_ids][item.id.to_s]['new_quantity'].to_i
-
-			unless  new_quantity == item.stock
-				item.stock = new_quantity
-				item.trace_comment = comment
-				item.trace_user = current_user.id
-				item.save
+			unless new_quantity == batch.stock
+				batch.stock = new_quantity
+				batch.trace_comment = comment
+				batch.trace_user = current_user.id
+				batch.save
 			end
 		end
 
-		redirect_to items_update_inventory_path, notice: 'Inventario actualizado'
+		redirect_to items_update_inventory_path, flash: {success: 'Inventario actualizado'}
 	end
 
 
 	# ********************* reportes ****************************
 	def current_stock
-		@items = Item.in_stock.paginate(page: params[:page])
+		@items = Batch.in_stock.paginate(page: params[:page])
 	end
 
 	def under_minimum_stock
-		@items = Item.under_minimum_stock.paginate(page: params[:page])
+		@items = Batch.under_minimum_stock.paginate(page: params[:page])
 	end
 
 	def by_provider

@@ -14,5 +14,4 @@ module ItemsHelper
 	def units_to_words(units)
  		units == 1 ? "#{units} unidad" : "#{units} unidades"
 	end
-
 end

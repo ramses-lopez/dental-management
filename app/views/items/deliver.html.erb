@@ -1,6 +1,6 @@
 <%= render 'shared/infobox', message: "Ingrese el número de unidades del #{Item.model_name.human} que desea entregar, y haga click en 'Registrar Entrega'"%>
 
-<% if @items.size > 0 %>
+<% if @batches.size > 0 %>
 	<%= form_for :item, url: {action: 'deliver_stock'} do %>
 		<table class='table table-hover table-bordered table-condensed'>
 			<thead>
@@ -11,20 +11,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% @items.each do |item| %>
-					<%= fields_for "item_ids[]", item do |item_fields| %>
+				<% @batches.each do |batch| %>
+					<%= fields_for "item_ids[]", batch do |item_fields| %>
 						<tr>
 							<%= item_fields.hidden_field :type, value: '-' %>
 							<%= item_fields.hidden_field :comment, value: 'Entrega de material' %>
-							<td><%= item.label %></td>
-							<td><%= item.stock %></td>
-							<td><%= item_fields.number_field :delta, in: 0..item.stock, value: 0, class: 'span1' %></td>
+							<td><%= batch.label %></td>
+							<td><%= batch.formatted_stock %></td>
+							<td><%= item_fields.number_field :delta, in: 0..batch.stock, value: 0, class: 'span1' %></td>
 						</tr>
 					<% end %>
 				<% end %>
 			</tbody>
 		</table>
-		<%= render 'shared/paginate', object: @items %>
+		<%= render 'shared/paginate', object: @batches %>
 		<%= submit_tag 'Registrar Entrega' %>
 	<% end %>
 <% else %>
