@@ -1,7 +1,7 @@
 <h3><%= Item.model_name.human.pluralize(:es) %> próximos a agotarse</h3>
-<%= render 'shared/infobox', message: "#{Item.model_name.human.pluralize(:es)} cuyo stock se encuentra por debajo del mínimo deseado" %>
+<%= render 'shared/infobox', message: "#{Item.model_name.human.pluralize(:es)} cuya existencia se encuentra por debajo del mínimo deseado" %>
 <% if @items.size > 0 %>
-	<table class='table table-condensed table-hover table-bordered'>
+	<table class='table table-condensed table-striped table-hover table-bordered'>
 		<thead>
 			<tr>
 				<th>Descripción</th>
@@ -24,4 +24,4 @@
 	<%= render 'shared/no_records_found', object_class: Item %>
 <% end %>
 <br>
-<%= render 'legend' %>
+<%#= render 'legend' %>

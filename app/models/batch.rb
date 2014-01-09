@@ -12,7 +12,7 @@ class Batch < ActiveRecord::Base
 	attr_accessor :delta, :type, :trace_comment, :trace_user
 
 	scope :in_stock, -> {includes(:item).where('stock > 0').order("items.label")}
-	scope :under_minimum_stock, -> {includes(:item).where("stock <= minimum_stock and stock >= 0").order("items.label")}
+	scope :under_minimum_stock, -> {joins(:item).includes(:item).where("stock <= minimum_stock and stock >= 0").order("items.label")}
 
 	with_options presence: :true do |opt|
 		opt.validates :stock, numericality: { only_integer: true }
@@ -20,7 +20,8 @@ class Batch < ActiveRecord::Base
 
 	def label
 		lbl = "#{self.item.label} [Lote #{self.batch_number}"
-		lbl += ", expira: #{self.expiration_date.to_formatted_s(:short_date)}]" unless self.expiration_date.nil?
+		lbl += self.expiration_date.nil? ? ']' : ", expira: #{self.expiration_date.to_formatted_s(:short_date)}]"
+
 	end
 
 	def formatted_stock
