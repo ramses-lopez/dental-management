@@ -14,6 +14,8 @@ DentoSpa::Application.routes.draw do
   	get "items/by_provider"
 	get "items/by_item"
 	get "items/under_minimum_stock"
+	get "items/expiring_soon"
+
 
   	match 'traces/filter' => 'traces#filter', via: [:get, :post]
 

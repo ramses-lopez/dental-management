@@ -139,6 +139,9 @@ class ItemsController < ApplicationController
 		end
 	end
 
+	def expiring_soon
+		@items = Batch.expiring_soon.paginate(page: params[:page])
+	end
 
 	private
 		# Use callbacks to share common setup or constraints between actions.
