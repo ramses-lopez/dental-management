@@ -17,13 +17,12 @@
 			<%= render 'layouts/footer'%>
 		</div>
 
-		<% if Rails.env == 'development' %>
-			<h5 style="color: white; text-align: center">First do it. Then do it right. Then do it better.</h5>
-
-			<%= render 'layouts/to_do'%>
-			<%= debug(session.to_hash) %>
-			<%= debug(params) %>
-		<% end %>
+		<div style="margin-top: 20px">
+			<% if Rails.env == 'development' %>
+				<%= debug(session.to_hash) %>
+				<%= debug(params) %>
+			<% end %>
+		</div>
 
 	</body>
 </html>
