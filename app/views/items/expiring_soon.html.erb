@@ -1,0 +1,28 @@
+<h3><%= Item.model_name.human.pluralize(:es) %> próximos a agotarse</h3>
+<%= render 'shared/infobox', message: "#{Item.model_name.human.pluralize(:es)} cuya fecha de expiración es menor a un mes" %>
+<% if @items.size > 0 %>
+	<table class='table table-condensed table-striped table-hover table-bordered'>
+		<thead>
+			<tr>
+				<th>Descripción</th>
+				<th>Existencia mínima</th>
+				<th>Existencia</th>
+				<th>Expira</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @items.each do |batch| %>
+				<tr class=''>
+					<td><%= batch.label %></td>
+					<td><%= batch.item.minimum_stock %></td>
+					<td><%= batch.stock %></td>
+					<td><%= batch.expiration_date %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<%= render 'shared/paginate', object: @items %>
+<% else %>
+	<%= render 'shared/no_records_found', object_class: Item %>
+<% end %>
+<br>

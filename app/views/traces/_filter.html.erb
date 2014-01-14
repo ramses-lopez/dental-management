@@ -2,12 +2,12 @@
 	<%= form_for traces_path, method: :get do %>
 		<div class="span3 input-append date">
 			<%= label_tag 'Fecha de inicio' %>
-			<%= text_field_tag :start_date,'', class: 'until_now_cal span2 date'%>
+			<%= text_field_tag :start_date,'', class: 'open_cal span2 date'%>
 			<span class="add-on"><i class="icon-th"></i></span>
 		</div>
 		<div class="span3 input-append date">
 			<%= label_tag 'Fecha Fin' %>
-			<%= text_field_tag :end_date,'', class: 'from_now_cal span2 date'%>
+			<%= text_field_tag :end_date,'', class: 'open_cal span2 date'%>
 			<span class="add-on"><i class="icon-th"></i></span>
 		</div>
 		<div class='span3'>
