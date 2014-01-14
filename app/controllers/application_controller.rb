@@ -6,4 +6,6 @@ class ApplicationController < ActionController::Base
 
 	protect_from_forgery with: :exception
 	before_action :signed_in_user
+	#TODO: activar este rescue
+	#rescue_from Your::Exception, :with => :show_some_error_page
 end

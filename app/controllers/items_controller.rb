@@ -125,7 +125,10 @@ class ItemsController < ApplicationController
 
 	def by_provider
 		if params[:provider_id]
-			@invoice_items = InvoiceItem.joins(:invoice).where("invoices.provider_id = ?", params[:provider_id]).paginate(page: params[:page])
+			@invoice_items = InvoiceItem.includes(:item, :invoice).joins(invoice: :invoice_items)
+				.where("invoices.provider_id = ?", params[:provider_id])
+				.distinct.order(:updated_at)
+				.paginate(page: params[:page])
 		else
 			@invoice_items = nil
 		end
@@ -135,7 +138,7 @@ class ItemsController < ApplicationController
 		if params[:item_id]
 			@invoice_items = InvoiceItem.joins(invoice: :provider).where("invoice_items.item_id = ?", params[:item_id]).paginate(page: params[:page])
 		else
-			@invoice_items = nil
+			@invoice_items = []
 		end
 	end
 

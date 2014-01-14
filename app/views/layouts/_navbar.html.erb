@@ -13,6 +13,8 @@
 						<li><%= link_to "#{Item.model_name.human.pluralize(:es)} en existencia", items_current_stock_path %></li>
 						<li><%= link_to "#{Item.model_name.human.pluralize(:es)} próximos a agotarse", items_under_minimum_stock_path %></li>
 						<li><%= link_to "#{Item.model_name.human.pluralize(:es)} próximos a vencerse", items_expiring_soon_path %></li>
+						<li><%= link_to "#{Item.model_name.human.pluralize(:es)} comprados", items_by_item_path %></li>
+						<li><%= link_to "#{Item.model_name.human.pluralize(:es)} por proveedor", items_by_provider_path %></li>
 						<% if current_role.admin? %>
 							<li><%= link_to 'Registro de movimientos', traces_path %></li>
 						<% end %>

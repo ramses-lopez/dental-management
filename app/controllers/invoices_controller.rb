@@ -78,7 +78,7 @@ class InvoicesController < ApplicationController
 	# Use callbacks to share common setup or constraints between actions.
 	def set_invoice
 		begin
-			@invoice = Invoice.find(params[:id])
+			@invoice = Invoice.includes(invoice_items: :item ).find(params[:id])
 		rescue ActiveRecord::RecordNotFound => e
 			redirect_to invoices_path, error: "No se encontró la #{Invoice.model_name.human} con ID #{params[:id]}"
 		end

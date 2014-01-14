@@ -31,7 +31,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%= f.fields_for :invoice_items do |builder| %>
+			<%= f.fields_for @invoice.invoice_items do |builder| %>
 				<%= render 'invoice_items/fields', :f => builder %>
 			<% end %>
 		</tbody>

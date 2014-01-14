@@ -6,6 +6,8 @@ class Item < ActiveRecord::Base
 	before_save lambda{self.label.upcase!}
 	default_scope {order :label}
 
+	scope :in_invoices, -> {joins(:invoice_items)}
+
 	with_options presence: :true do |opt|
 		opt.validates :label
 	end

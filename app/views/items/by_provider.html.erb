@@ -1,4 +1,14 @@
-<%= render 'shared/back_btn'%>
+<div class="row filter-box">
+	<%= form_for items_by_provider_path, method: :get do %>
+		<div class='span12'>
+			<%= label_tag Provider.model_name.human.pluralize(:es) %>
+			<%= select_tag :provider_id, grouped_options_for_select(get_grouped_options(Provider.with_invoices), params[:item_id]), prompt: "- Seleccione -", class: 'span2' %>
+		</div>
+		<div class='span2'>
+			<%= submit_tag 'Buscar' %>
+		</div>
+	<% end %>
+</div>
 <% if @invoice_items && @invoice_items.size > 0 %>
 	<h3><%= InvoiceItem.model_name.human.pluralize(:es) %> comprados a <%= @invoice_items.first.invoice.provider.label%> </h3>
 	<table class='table table-condensed table-hover table-bordered'>
@@ -6,14 +16,16 @@
 			<tr>
 				<th>Descripción</th>
 				<th>Precio</th>
+				<th>Factura</th>
 				<th>Comprado el</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @invoice_items.each do |invoice_item| %>
 				<tr>
-					<td><%= link_to invoice_item.item.label, item_by_item_path(item_id: invoice_item.item_id) %></td>
+					<td><%= link_to invoice_item.item.label, items_by_item_path(item_id: invoice_item.item_id) %></td>
 					<td><%= invoice_item.item_price %></td>
+					<td><%= link_to invoice_item.invoice.number, invoice_path(invoice_item.invoice.id) %></td>
 					<td><%= invoice_item.invoice.updated_at.to_formatted_s(:short) %></td>
 				</tr>
 			<% end %>

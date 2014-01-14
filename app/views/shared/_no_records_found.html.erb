@@ -1,6 +1,6 @@
 <div class='text-center'>
 	<h4>No se encontraron <%= object_class.model_name.human.pluralize(:es) %></h4>
-	<% unless object_class == Trace %>
+	<% unless object_class.nil? || object_class == Trace %>
 		<h5><%= link_to "Crear #{object_class.model_name.human}", new_polymorphic_path(object_class) %></h5>
 	<% end %>
 </div>
