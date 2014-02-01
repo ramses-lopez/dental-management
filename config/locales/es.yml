@@ -239,6 +239,8 @@ es:
         name: Nombre
         role: Rol
         username: Nombre de Usuario
+        password: Contraseña
+        password_confirmation: Confirmación de Contraseña
   text:
     update: Actualizar
     add: Agregar
