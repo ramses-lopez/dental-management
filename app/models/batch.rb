@@ -24,7 +24,7 @@ class Batch < ActiveRecord::Base
 
 	def label
 		lbl = "#{self.item.label} [Lote #{self.batch_number}"
-		lbl += self.expiration_date.nil? ? ']' : ", expira: #{self.expiration_date.to_formatted_s(:short_date)}]"
+		lbl += self.expiration_date.nil? ? ']' : ", expira: #{self.expiration_date.to_formatted_s(:short)}]"
 
 	end
 

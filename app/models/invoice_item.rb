@@ -10,22 +10,27 @@ class InvoiceItem < ActiveRecord::Base
 
 	#TODO: cuando se crea la factura no se esta guardando el comentario para el trace
 	def create_invoice_item
-		comment = trace_comment.blank? ? "Creación de factura #{self.invoice.number}" : self.trace_comment
+		comment = "Creación de factura #{self.invoice.number}"
 
 		self.batch = Batch.where(item_id: self.item_id, batch_number: self.batch_number.to_s).first_or_create do |_b|
 			_b.item_id = self.item_id
 			_b.batch_number = self.batch_number
 			_b.expiration_date = self.expiration_date
 			_b.stock += self.quantity
-			_b.trace_comment = self.trace_comment
+			_b.trace_comment = comment
 			_b.trace_user = self.trace_user
 		end
 	end
 
 	def update_invoice_item
-		batch = self.batch
+		#FIXME: no estoy seguro que esta causando un readonlyrecord error aqui. por alguna razon rails esta marcando el objeto como readonly
+		#batch = self.batch
+		batch = Batch.find(self.batch.id, readonly: false)
+
 		batch.expiration_date = self.expiration_date
 		comment = self.trace_comment.blank? ? "Actualización de factura #{self.invoice.number}" : self.trace_comment
+
+		logger.debug "readonly: #{batch.readonly?}"
 
 		case
 			when self.batch_number_changed?

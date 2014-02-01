@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
 	has_many :invoice_items
 	has_many :batches
 	validates :label, uniqueness: { case_sensitive: false }
-	before_save lambda{self.label.upcase!}
+	before_save lambda{ self.label.mb_chars.upcase!.to_s }
 	default_scope {order :label}
 
 	scope :in_invoices, -> {joins(:invoice_items)}

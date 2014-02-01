@@ -195,7 +195,7 @@ es:
     am: am
     formats:
       default: ! '%a, %d de %b de %Y a las %H:%M:%S%p %Z'
-      #long: ! '%A, %d de %B de %Y a las %I:%M%p'
+      long: ! '%A, %d de %B de %Y a las %I:%M%p'
       short: ! '%d de %b a las %H:%M%p'
     pm: pm
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
@@ -211,6 +211,7 @@ es:
       item: Material
       provider: Proveedor
       trace: Registro
+      user: Usuario
     attributes:
       invoice:
         provider_id: Proveedor
@@ -234,6 +235,10 @@ es:
         email: Correo Electrónico
         website: Página Web
         address: Dirección
+      user:
+        name: Nombre
+        role: Rol
+        username: Nombre de Usuario
   text:
     update: Actualizar
     add: Agregar

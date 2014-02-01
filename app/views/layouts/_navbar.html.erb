@@ -28,6 +28,9 @@
 						<li><%= link_to 'Actualización de Inventario', items_update_inventory_path %></li>
 						<li><%= link_to 'Materiales', items_path %></li>
 						<li><%= link_to 'Proveedores', providers_path %></li>
+						<% if current_role.admin? %>
+							<li><%= link_to 'Usuarios', users_path %></li>
+						<% end %>
 					</ul>
 				</li>
 			</ul>
