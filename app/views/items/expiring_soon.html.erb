@@ -1,5 +1,5 @@
-<h3><%= Item.model_name.human.pluralize(:es) %> próximos a agotarse</h3>
-<%= render 'shared/infobox', message: "#{Item.model_name.human.pluralize(:es)} cuya fecha de expiración es menor a un mes" %>
+<h3><%= Item.model_name.human.pluralize(:es) %> próximos a expirar</h3>
+<%= render 'shared/infobox', message: "#{Item.model_name.human.pluralize(:es)} cuya fecha de expiración es menor a un mes o que ya han expirado" %>
 <% if @items.size > 0 %>
 	<table class='table table-condensed table-striped table-hover table-bordered'>
 		<thead>
@@ -16,7 +16,7 @@
 					<td><%= batch.label %></td>
 					<td><%= batch.item.minimum_stock %></td>
 					<td><%= batch.stock %></td>
-					<td><%= batch.expiration_date %></td>
+					<td><%= batch.expiration_date.to_formatted_s(:long) %></td>
 				</tr>
 			<% end %>
 		</tbody>

@@ -15,8 +15,8 @@
 					<tr>
 						<td><%= invoice.provider.label %></td>
 						<td><%= link_to invoice.number, invoice_path(invoice.id) %></td>
-						<td><%= invoice.date.to_formatted_s(:short_date) %></td>
-						<td><%= invoice.updated_at.to_formatted_s(:short_date) %></td>
+						<td><%= invoice.date.to_formatted_s(:long) %></td>
+						<td><%= invoice.updated_at.to_formatted_s(:long) %></td>
 
 						<td><%= render 'shared/btn_group_action', object: invoice %> </td>
 					</tr>

@@ -9,7 +9,7 @@ class Batch < ActiveRecord::Base
 	after_save :add_trace
 
 	#TODO: hay que agregar el default_scope para que sea con el label del item
-	default_scope {joins(:item).order("items.label")}
+	#default_scope {joins(:item).order("items.label")}
 
 	#campos para tracing
 	attr_accessor :delta, :type, :trace_comment, :trace_user
@@ -23,9 +23,14 @@ class Batch < ActiveRecord::Base
 	end
 
 	def label
-		lbl = "#{self.item.label} [Lote #{self.batch_number}"
-		lbl += self.expiration_date.nil? ? ']' : ", expira: #{self.expiration_date.to_formatted_s(:short)}]"
+		bn = self.batch_number.blank? ? 'sin lote' : "Lote #{self.batch_number}"
+		lbl = "#{self.item.label} [#{bn}"
+		lbl += self.expiration_date.nil? ? ']' : ", expira: #{self.expiration_date.to_formatted_s(:long)}]"
 
+	end
+
+	def formatted_batch_number
+		self.batch_number.blank? ? 'sin lote' : self.batch_number
 	end
 
 	def formatted_stock

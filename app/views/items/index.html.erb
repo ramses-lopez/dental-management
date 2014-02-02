@@ -20,9 +20,11 @@
 							<ul>
 								<% unless item.stock == 0 %>
 									<% item.batches.each do |batch|%>
-										<li>Lote <%= batch.batch_number%>: <%= units_to_words(batch.stock) %><%= ", expira: #{batch.expiration_date.to_formatted_s(:short_date)}" unless batch.expiration_date.nil? %>
+										<li>Lote <%= batch.batch_number%>: <%= units_to_words(batch.stock) %><%= ", expira: #{batch.expiration_date.to_formatted_s(:long)}" unless batch.expiration_date.nil? %>
 										</li>
 									<% end %>
+								<% else %>
+									<li>Sin existencia</li>
 								<% end %>
 							</ul>
 						</div>
@@ -41,4 +43,3 @@
 <% end %>
 <br>
 <%= render 'shared/form_new', object: Item %>
-<%#= render 'legend' %>
