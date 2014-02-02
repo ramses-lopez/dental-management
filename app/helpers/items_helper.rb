@@ -15,17 +15,17 @@ module ItemsHelper
  		units == 1 ? "#{units} unidad" : "#{units} unidades"
 	end
 
-	def item_format_batches(item)
+	def item_formatted_batches(item)
 		unless item.stock == 0
-			msg = ""
+			msg = "<div><ul>"
 			item.batches.each do |batch|
-				msg += "<li>Lote #{formatted_batch_number} #{batch.formatted_stock}"
-				msg += ", expira: #{batch.expiration_date.to_formatted_s}" unless batch.expiration_date.nil?
+				msg += "<li>Lote #{batch.formatted_batch_number} #{batch.formatted_stock}"
+				msg += ", expira: #{batch.expiration_date.to_formatted_s(:long)}" unless batch.expiration_date.nil?
 				msg += "</li>"
 			end
-			return msg
+			return "#{msg}</ul></div>".html_safe
 		else
-			"<li>Sin existencia</li>"
+			"<div><ul><li>Sin existencia</li></ul></div>".html_safe
 		end
 
 	end

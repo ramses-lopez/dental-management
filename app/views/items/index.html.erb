@@ -13,21 +13,10 @@
 		<tbody>
 			<% @items.each do |item| %>
 				<tr class=''>
-					<td><%= link_to item.label, item_path(item) %></td>
+					<td><%= link_to item.label, edit_item_path(item) %></td>
 					<td><%= units_to_words(item.minimum_stock) %></td>
 					<td class='item-stock <%= stock_level_class(item) %>'>
-						<div>
-							<ul>
-								<% unless item.stock == 0 %>
-									<% item.batches.each do |batch|%>
-										<li>Lote <%= batch.batch_number%>: <%= units_to_words(batch.stock) %><%= ", expira: #{batch.expiration_date.to_formatted_s(:long)}" unless batch.expiration_date.nil? %>
-										</li>
-									<% end %>
-								<% else %>
-									<li>Sin existencia</li>
-								<% end %>
-							</ul>
-						</div>
+						<%= item_formatted_batches(item)%>
 					</td>
 					<td>
 						<%= units_to_words(item.stock) %>
