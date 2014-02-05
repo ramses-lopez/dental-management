@@ -1,13 +1,13 @@
-<div class="row filter-box">
-	<%= form_for traces_path, method: :get do %>
+<%= form_for traces_path, method: :get do %>
+	<div class="row filter-box">
 		<div class="span3 input-append date">
 			<%= label_tag 'Fecha de inicio' %>
-			<%= text_field_tag :start_date,'', class: 'open_cal span2 date'%>
+			<%= text_field_tag :start_date,params[:start_date], class: 'open_cal span2 date'%>
 			<span class="add-on"><i class="icon-th"></i></span>
 		</div>
 		<div class="span3 input-append date">
 			<%= label_tag 'Fecha Fin' %>
-			<%= text_field_tag :end_date,'', class: 'open_cal span2 date'%>
+			<%= text_field_tag :end_date,params[:end_date], class: 'open_cal span2 date'%>
 			<span class="add-on"><i class="icon-th"></i></span>
 		</div>
 		<div class='span3'>
@@ -18,8 +18,13 @@
 			<%= label_tag 'Material' %>
 			<%= select_tag :item_id, grouped_options_for_select(get_grouped_options(Item.all), params[:item_id]), prompt: "- Seleccione -", class: 'span2' %>
 		</div>
-		<div class='span2'>
+	</div>
+	<div class='row'>
+		<div class="span6">
 			<%= submit_tag 'Buscar' %>
+			<%= submit_tag 'Limpiar campos', type: 'reset' %>
 		</div>
-	<% end %>
-</div>
+		<div class="span2 offset1">
+		</div>
+	</div>
+<% end %>

@@ -10,8 +10,8 @@ class Trace < ActiveRecord::Base
 	scope :by_user_id, ->(user_id) {where(user_id: user_id)}
 
 	def self.within(start_date, end_date)
-		start_date = DateTime.parse(start_date).start_of_day
-		end_date = DateTime.parse(end_date).end_of_day
+		start_date = Date.parse(start_date)
+		end_date = Date.parse(end_date)
 
     	where(created_at: start_date..end_date)
   	end
