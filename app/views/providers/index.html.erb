@@ -27,7 +27,7 @@
 	<%= render 'shared/no_records_found', object_class: Invoice %>
 <% end %>
 
-<%= render 'shared/paginate' %>
+<%= render 'shared/paginate', object: @providers %>
 
 <%= render 'shared/form_new', object: Provider %>
 
