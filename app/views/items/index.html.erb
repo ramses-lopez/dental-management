@@ -1,4 +1,14 @@
 <h3>Listado de <%= Item.model_name.human.pluralize(:es) %></h3>
+
+<div>
+	<%= form_tag items_path, method: :get do |f| %>
+		<%= select_tag :item_id, grouped_options_for_select(get_grouped_options(Item.all), params[:item_id]), class: 'span4', prompt: t('helpers.select.prompt') %>
+		<br>
+		<%= button_tag 'Buscar', class: 'btn', name: :search%>
+	<% end %>
+</div>
+
+
 <% if @items.size > 0 %>
 	<table class='table table-condensed table-hover table-bordered'>
 		<thead>

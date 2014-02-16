@@ -1,13 +1,14 @@
 class ItemsController < ApplicationController
 
 	skip_before_action :signed_in_user, only: [:current_stock]
-
 	before_action :set_item, only: [:show, :edit, :update, :destroy]
 
 	# GET /items
 	# GET /items.json
 	def index
-		@items = Item.all.paginate(page: params[:page])
+		@items = Item.all
+		@items = @items.where(id: params[:item_id]) unless params[:item_id].blank?
+		@items = @items.paginate(page: params[:page])
 	end
 
 	# GET /items/1
