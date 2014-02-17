@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230224753) do
+ActiveRecord::Schema.define(version: 20140217010309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20131230224753) do
     t.integer  "quantity",                                 default: 1,   null: false
     t.decimal  "item_price",      precision: 15, scale: 2, default: 0.0
     t.string   "batch_number"
-    t.datetime "expiration_date"
+    t.date     "expiration_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20131230224753) do
     t.string   "label",                     null: false
     t.integer  "minimum_stock", default: 1
     t.integer  "active"
+    t.integer  "unit_type_id",  default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,6 +79,12 @@ ActiveRecord::Schema.define(version: 20131230224753) do
     t.integer  "value"
     t.string   "type"
     t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "unit_types", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

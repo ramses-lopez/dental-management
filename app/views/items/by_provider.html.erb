@@ -26,7 +26,7 @@
 					<td><%= link_to invoice_item.item.label, items_by_item_path(item_id: invoice_item.item_id) %></td>
 					<td><%= invoice_item.item_price %></td>
 					<td><%= link_to invoice_item.invoice.number, invoice_path(invoice_item.invoice.id) %></td>
-					<td><%= invoice_item.invoice.updated_at.to_formatted_s(:short) %></td>
+					<td><%= l(invoice_item.invoice.updated_at, format: :short_date) %></td>
 				</tr>
 			<% end %>
 		</tbody>

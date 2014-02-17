@@ -25,8 +25,7 @@ class Batch < ActiveRecord::Base
 	def label
 		bn = self.batch_number.blank? ? 'sin lote' : "Lote #{self.batch_number}"
 		lbl = "#{self.item.label} [#{bn}"
-		lbl += self.expiration_date.nil? ? ']' : ", expira: #{self.expiration_date.to_formatted_s(:long)}]"
-
+		lbl += self.expiration_date.nil? ? ']' : ", expira:#{I18n.localize(self.expiration_date)}]"
 	end
 
 	def formatted_batch_number
@@ -34,7 +33,7 @@ class Batch < ActiveRecord::Base
 	end
 
 	def formatted_stock
-		stock == 1 ? "#{stock} unidad" : "#{stock} unidades"
+		stock == 1 ? "#{stock} #{self.item.unit_type.name}" : "#{stock} #{self.item.unit_type.name.pluralize(:es)}"
 	end
 
 	def add_stock(quantity = 1)

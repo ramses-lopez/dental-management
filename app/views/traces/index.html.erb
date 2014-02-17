@@ -20,7 +20,7 @@
 				<td><%= trace.value %></td>
 				<td><%= trace.user.nil? ? '' : trace.user.name %></td>
 				<td><%= trace.comment %></td>
-				<td><%= trace.created_at.to_formatted_s(:short) %></td>
+				<td><%= l(trace.created_at) %></td>
 			</tr>
 			<% end %>
 		</tbody>

@@ -10,7 +10,12 @@
 			<%= f.number_field :minimum_stock %>
 		</div>
 	</div>
-
+	<div class="row">
+		<div class="span5">
+			<%= f.label :unit_type_id %>
+			<%= f.select :unit_type_id, options_for_select(UnitType.options, @item.unit_type_id), {prompt: true} %>
+		</div>
+	</div>
 	<div class="actions">
 		<%= f.submit %>
 	</div>

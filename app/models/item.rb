@@ -1,7 +1,8 @@
 class Item < ActiveRecord::Base
-
 	has_many :invoice_items
 	has_many :batches
+	belongs_to :unit_type
+
 	validates :label, uniqueness: { case_sensitive: false }
 	before_save lambda{ self.label = self.label.mb_chars.upcase.to_s }
 	default_scope {order :label}

@@ -193,11 +193,12 @@ es:
       words_connector: ! ', '
   time:
     am: am
+    pm: pm
     formats:
-      default: ! '%a, %d de %b de %Y a las %H:%M:%S%p %Z'
+      default: ! '%d/%m/%Y %H:%M:%S%p'
       long: ! '%A, %d de %B de %Y a las %I:%M%p'
       short: ! '%d de %b a las %H:%M%p'
-    pm: pm
+      short_date: '%d/%m/%Y'
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
     errors:
@@ -229,6 +230,7 @@ es:
         label: Descripción
         stock: Existencia
         minimum_stock: Existencia mínima
+        unit_type_id: Tipo de unidad
       provider:
         label: Nombre
         phone: Teléfono

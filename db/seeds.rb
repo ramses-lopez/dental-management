@@ -24,6 +24,14 @@ ActiveRecord::Base.transaction do
 		{label: 'Proveedor desconocido'}
 		])
 
+	clear_and_reset('UnitType')
+	UnitType.create!([
+		{name: 'Unidad'},
+		{name: 'Caja'},
+		{name: 'Bolsa'},
+		{name: 'Paquete'},
+	])
+
 	clear_and_reset('Item')
 	Item.create!([
 		{label: "Abreboca"},

@@ -8,7 +8,6 @@
 	<% end %>
 </div>
 
-
 <% if @items.size > 0 %>
 	<table class='table table-condensed table-hover table-bordered'>
 		<thead>
@@ -24,12 +23,12 @@
 			<% @items.each do |item| %>
 				<tr class=''>
 					<td><%= link_to item.label, edit_item_path(item) %></td>
-					<td><%= units_to_words(item.minimum_stock) %></td>
-					<td class='item-stock <%= stock_level_class(item) %>'>
+					<td><%= units_to_words(item,item.minimum_stock) %></td>
+					<td class='item-stock'>
 						<%= item_formatted_batches(item)%>
 					</td>
 					<td>
-						<%= units_to_words(item.stock) %>
+						<%= units_to_words(item, item.stock ) %>
 					</td>
 					<td><%= render 'shared/btn_group_action', object: item %> </td>
 				</tr>

@@ -16,7 +16,7 @@
 					<td><%= batch.label %></td>
 					<td><%= batch.item.minimum_stock %></td>
 					<td><%= batch.stock %></td>
-					<td><%= batch.expiration_date.to_formatted_s(:long) %></td>
+					<td><%= l(batch.expiration_date) %></td>
 				</tr>
 			<% end %>
 		</tbody>
