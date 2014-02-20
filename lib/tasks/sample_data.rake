@@ -4,9 +4,9 @@ namespace :db do
 		reset_db if Rails.env.development?
 		ActiveRecord::Base.transaction do
 			#create_items
-			create_providers
+			#create_providers
 			create_users
-			create_invoices
+			#create_invoices
 		end
 	end
 end
