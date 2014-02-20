@@ -230,7 +230,7 @@ es:
         label: Descripción
         stock: Existencia
         minimum_stock: Existencia mínima
-        unit_type_id: Tipo de unidad
+        unit_type_id: Presentación
       provider:
         label: Nombre
         phone: Teléfono
