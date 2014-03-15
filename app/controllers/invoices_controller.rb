@@ -23,6 +23,10 @@ class InvoicesController < ApplicationController
 		@tax_total = @subtotal*tax
 		@total = @subtotal*(1+tax)
 
+		@subtotal = ActionController::Base.helpers.number_to_currency(@subtotal)
+		@tax_total = ActionController::Base.helpers.number_to_currency(@tax_total)
+		@total = ActionController::Base.helpers.number_to_currency(@total)
+
 	end
 
 	# GET /invoices/new
