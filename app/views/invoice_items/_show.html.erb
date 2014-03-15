@@ -2,6 +2,6 @@
 	<td><%= ii.item.label %></td>
 	<td><%= ii.quantity %></td>
 	<td><%= ActionController::Base.helpers.number_to_currency(ii.item_price) %></td>
-	<td><%= ii.batch_number %></td>
-	<td><%= ii.expiration_date.nil? ? 'No aplica' : l(ii.expiration_date) %></td>
+	<td><%= ii.batch_number.blank? ? 'sin lote' : ii.batch_number %></td>
+	<td><%= ii.expiration_date.nil? ? 'no aplica' : l(ii.expiration_date) %></td>
 </tr>

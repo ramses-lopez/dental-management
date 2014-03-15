@@ -72,6 +72,9 @@ class InvoicesController < ApplicationController
 	# DELETE /invoices/1.json
 	def destroy
 		@invoice.destroy
+
+		#TODO: Aqui falta actualizar el batch correspondiente
+
 		respond_to do |format|
 			format.html { redirect_to invoices_url }
 			format.json { head :no_content }
