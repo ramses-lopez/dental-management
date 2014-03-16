@@ -66,7 +66,9 @@ class ItemsController < ApplicationController
 	end
 
 	def deliver
-		@batches = Batch.joins(:item).includes(:item).in_stock.order("items.label").paginate(page: params[:page])
+		@batches = Batch.joins(:item).includes(:item).in_stock.order("items.label")
+		@batches = @batches.where(item_id: params[:item_id]) unless params[:item_id].blank?
+		@batches = @batches.paginate(page: params[:page])
 	end
 
 	def deliver_stock
@@ -108,8 +110,6 @@ class ItemsController < ApplicationController
 		redirect_to items_update_inventory_path, flash: {success: 'Inventario actualizado'}
 	end
 
-
-	# ********************* reportes ****************************
 	def current_stock
 		@items = Batch.in_stock.paginate(page: params[:page])
 	end

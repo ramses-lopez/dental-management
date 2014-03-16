@@ -6,7 +6,7 @@ class Item < ActiveRecord::Base
 	validates :label, uniqueness: { case_sensitive: false }
 	before_save lambda{ self.label = self.label.mb_chars.upcase.to_s }
 	default_scope {order :label}
-
+	scope :active, -> {where(active: 1)}
 	scope :in_invoices, -> {joins(:invoice_items)}
 
 	with_options presence: :true do |opt|
