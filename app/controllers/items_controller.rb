@@ -111,7 +111,10 @@ class ItemsController < ApplicationController
 	end
 
 	def current_stock
-		@items = Batch.in_stock.paginate(page: params[:page])
+		@items = Batch.joins(:item).includes(:item).in_stock.order("items.label")
+		@items = @items.where(item_id: params[:item_id]) unless params[:item_id].blank?
+		@items = @items.paginate(page: params[:page])
+		#@items = Batch.in_stock.paginate(page: params[:page])
 	end
 
 	def under_minimum_stock

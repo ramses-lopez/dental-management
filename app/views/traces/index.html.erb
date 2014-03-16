@@ -16,7 +16,8 @@
 		<tbody>
 			<% @traces.each do |trace| %>
 			<tr class="<%= trace.type == '+' ? 'success' : 'error' %>">
-				<td><%= trace.batch.item.label %> (Lote: <%= trace.batch.batch_number.blank? ? 'sin lote' : trace.batch.batch_number %>)</td>
+				<% lbl = (trace.batch.nil? || trace.batch.item.nil?) ? 'Material eliminado' : trace.batch.item.label %>
+				<td><%= lbl %> (Lote: <%= trace.batch.batch_number.blank? ? 'sin lote' : trace.batch.batch_number %>)</td>
 				<td><%= trace.value %></td>
 				<td><%= trace.user.nil? ? '' : trace.user.name %></td>
 				<td><%= trace.comment %></td>

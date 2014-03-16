@@ -1,13 +1,6 @@
 <%= render 'shared/infobox', message: "Ingrese el número de unidades del #{Item.model_name.human} que desea entregar, y haga click en 'Registrar Entrega'"%>
 
-<div>
-	<%= form_tag items_deliver_path, method: :get do |f| %>
-		<%= select_tag :item_id, grouped_options_for_select(get_grouped_options(Item.all), params[:item_id]), class: 'span4', prompt: t('helpers.select.prompt') %>
-		<br>
-		<%= button_tag 'Buscar', class: 'btn', name: :search%>
-	<% end %>
-</div>
-
+<%= render 'batch_filter' %>
 
 <% if @batches.size > 0 %>
 	<%= form_for :item, url: {action: 'deliver_stock'} do %>
