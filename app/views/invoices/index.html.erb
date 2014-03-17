@@ -26,5 +26,6 @@
 <% else %>
 	<%= render 'shared/no_records_found', object_class: Invoice %>
 <% end %>
+	<%= render 'shared/paginate', object: @invoices %>
 <br>
 <%= link_to "#{t('text.new')} #{Invoice.model_name.human}", new_invoice_path, class: 'btn' %>

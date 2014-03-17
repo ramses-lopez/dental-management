@@ -4,7 +4,8 @@ class InvoicesController < ApplicationController
 	# GET /invoices
 	# GET /invoices.json
 	def index
-		@invoices = Invoice.includes(:provider).all
+		@invoices = Invoice.includes(:provider)
+		@invoices = @invoices.paginate(page: params[:page])
 	end
 
 	# GET /invoices/1
