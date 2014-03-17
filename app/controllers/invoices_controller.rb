@@ -18,7 +18,7 @@ class InvoicesController < ApplicationController
 		tax = 0.12
 
 		@invoice.invoice_items.each do |item|
-			@subtotal += item.item_price
+			@subtotal += item.quantity * item.item_price
 		end
 
 		@tax_total = @subtotal*tax
