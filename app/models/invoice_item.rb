@@ -7,13 +7,22 @@ class InvoiceItem < ActiveRecord::Base
 	attr_accessor :trace_comment, :trace_user
 
 	before_save do
-		if new_record?
-			create_invoice_item
-		else
-			update_invoice_item
+		new_record? ? create_invoice_item : update_invoice_item
+	end
+
+	before_destroy do
+		batch = self.batch
+
+		unless batch.nil?
+			comment = "Actualización de factura #{self.invoice.number}"
+			batch.remove_stock(self.quantity)
+			batch.trace_user = self.trace_user
+			batch.trace_comment = comment
+			batch.trace_user = self.trace_user
+			batch.save
 		end
 	end
-	#TODO: cuando se crea la factura no se esta guardando el comentario para el trace
+
 	def create_invoice_item
 		comment = "Creación de factura #{self.invoice.number}"
 
@@ -31,7 +40,6 @@ class InvoiceItem < ActiveRecord::Base
 			batch.invoice_items << self
 			batch.save
 		else
-			debugger
 			batch.expiration_date = self.expiration_date
 			batch.stock += self.quantity
 			batch.trace_comment = comment
@@ -76,12 +84,6 @@ class InvoiceItem < ActiveRecord::Base
 				batch.trace_comment = comment
 				batch.trace_user = self.trace_user
 				batch.add_stock(self.quantity)
-				batch.save
-
-			when self.destroyed?
-				debugger
-				batch.remove_stock(self.quantity)
-				batch.trace_user = self.trace_user
 				batch.save
 		end
 	end

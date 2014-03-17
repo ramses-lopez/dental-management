@@ -1,6 +1,6 @@
 <tr>
 	<% lbl = (ii.batch.nil? || ii.item.nil?) ? 'Material eliminado' : ii.batch.item.label %>
-	<td><%= lbl %></td>
+	<td><%= ii.batch.item.label %></td>
 	<td><%= ii.quantity %></td>
 	<td><%= ActionController::Base.helpers.number_to_currency(ii.item_price) %></td>
 	<td><%= ii.batch_number.blank? ? 'sin lote' : ii.batch_number %></td>
