@@ -6,9 +6,8 @@ class InvoiceItem < ActiveRecord::Base
 
 	attr_accessor :trace_comment, :trace_user
 
-	before_save do
-		new_record? ? create_invoice_item : update_invoice_item
-	end
+	after_create { create_batch }
+	after_update { update_batch }
 
 	before_destroy do
 		batch = self.batch
@@ -23,7 +22,7 @@ class InvoiceItem < ActiveRecord::Base
 		end
 	end
 
-	def create_invoice_item
+	def create_batch
 		comment = "Creación de factura #{self.invoice.number}"
 
 		batch = Batch.find_by(item_id: self.item_id, batch_number: self.batch_number.to_s)
@@ -37,8 +36,8 @@ class InvoiceItem < ActiveRecord::Base
 				trace_comment: comment,
 				trace_user: self.trace_user,
 				)
-			batch.invoice_items << self
 			batch.save
+			self.update_column(:batch_id, batch.id) # es necesario brincarse el update callback
 		else
 			batch.expiration_date = self.expiration_date
 			batch.stock += self.quantity
@@ -49,7 +48,7 @@ class InvoiceItem < ActiveRecord::Base
 		end
 	end
 
-	def update_invoice_item
+	def update_batch
 		#FIXME: no estoy seguro que esta causando un readonlyrecord error aqui. por alguna razon rails esta marcando el objeto como readonly
 		#FIXME: DEPRECATION WARNING: Passing options to #find is deprecated. Please build a scope and then call #find on it. (called from update_invoice_item at /home/ramses/projects/dento-spa/app/models/invoice_item.rb:45)
 		#batch = self.batch
