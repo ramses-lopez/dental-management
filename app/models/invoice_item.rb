@@ -37,7 +37,6 @@ class InvoiceItem < ActiveRecord::Base
 				trace_user: self.trace_user,
 				)
 			batch.save
-			self.update_column(:batch_id, batch.id) # es necesario brincarse el update callback
 		else
 			batch.expiration_date = self.expiration_date
 			batch.stock += self.quantity
@@ -46,12 +45,13 @@ class InvoiceItem < ActiveRecord::Base
 			self.batch = batch
 			self.batch.save
 		end
+
+		self.update_column(:batch_id, batch.id) # es necesario brincarse el update callback
 	end
 
 	def update_batch
-		#FIXME: no estoy seguro que esta causando un readonlyrecord error aqui. por alguna razon rails esta marcando el objeto como readonly
 		#FIXME: DEPRECATION WARNING: Passing options to #find is deprecated. Please build a scope and then call #find on it. (called from update_invoice_item at /home/ramses/projects/dento-spa/app/models/invoice_item.rb:45)
-		#batch = self.batch
+		#FIXME: no estoy seguro que esta causando un readonlyrecord error aqui. por alguna razon rails esta marcando el objeto como readonly
 		batch = Batch.find(self.batch.id, readonly: false)
 
 		batch.expiration_date = self.expiration_date
