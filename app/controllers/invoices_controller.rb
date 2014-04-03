@@ -72,6 +72,7 @@ class InvoicesController < ApplicationController
 	# DELETE /invoices/1
 	# DELETE /invoices/1.json
 	def destroy
+		@invoice.trace_user = current_user
 		@invoice.destroy
 
 		#TODO: Aqui falta actualizar el batch correspondiente

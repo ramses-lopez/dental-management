@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+	attr_accessor :trace_user
+
 	belongs_to :provider
 
 	has_many :invoice_items, dependent: :destroy
@@ -10,4 +12,5 @@ class Invoice < ActiveRecord::Base
 	#TODO: hay que validar que manden al menos un invoice item y por ende un batch
 	validates :provider_id, :number, :date, presence: true
 
+	before_destroy { self.invoice_items.each {|ii| ii.trace_user = trace_user } }
 end
