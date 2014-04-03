@@ -47,7 +47,7 @@ class Batch < ActiveRecord::Base
 	def add_trace
 		trace = self.traces.build
 		trace.comment = self.trace_comment
-		trace.user_id = self.trace_user
+		trace.user_id = self.trace_user.class == User ? self.trace_user.id : self.trace_user
 		trace.value =  self.stock - self.stock_was
 		trace.type = trace.value >= 0 ? '+' : '-'
 

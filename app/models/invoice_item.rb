@@ -17,7 +17,9 @@ class InvoiceItem < ActiveRecord::Base
 			batch.remove_stock(self.quantity)
 			batch.trace_user = self.trace_user
 			batch.trace_comment = comment
-			batch.trace_user = self.trace_user
+
+			debugger
+
 			batch.save
 		end
 	end

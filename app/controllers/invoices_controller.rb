@@ -72,10 +72,12 @@ class InvoicesController < ApplicationController
 	# DELETE /invoices/1
 	# DELETE /invoices/1.json
 	def destroy
-		@invoice.trace_user = current_user
-		@invoice.destroy
+		@invoice.invoice_items.each do |ii|
+			ii.trace_user = current_user
+			ii.save
+		end
 
-		#TODO: Aqui falta actualizar el batch correspondiente
+		@invoice.destroy
 
 		respond_to do |format|
 			format.html { redirect_to invoices_url }
