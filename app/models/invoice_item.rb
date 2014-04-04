@@ -18,8 +18,6 @@ class InvoiceItem < ActiveRecord::Base
 			batch.trace_user = self.trace_user
 			batch.trace_comment = comment
 
-			debugger
-
 			batch.save
 		end
 	end
