@@ -17,4 +17,8 @@ class Item < ActiveRecord::Base
 		self.batches.nil? ? 0 : self.batches.sum(:stock)
 	end
 
+	def exempt_from_tax?
+		self.exempt_from_tax == 1
+	end
+
 end

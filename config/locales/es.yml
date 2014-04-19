@@ -231,6 +231,7 @@ es:
         stock: Existencia
         minimum_stock: Existencia mínima
         unit_type_id: Presentación
+        exempt_from_tax: Exento de IVA
       provider:
         label: Nombre
         phone: Teléfono

@@ -27,7 +27,11 @@
 		<% end %>
 	</tbody>
 </table>
-
+<div class="row">
+	<div class='span11 text-right'>
+		<p>(E) <%= Item.human_attribute_name(:exempt_from_tax) %> / (G) Gravado</p>
+	</div>
+</div>
 <div class='row '>
 	<div class='span11 text-right'>
 		<p><b>Subtotal:</b>  <span id='subtotal'><%=@subtotal%></span></p>

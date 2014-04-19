@@ -17,12 +17,12 @@ class InvoicesController < ApplicationController
 		@tax_total = 0
 		tax = 0.12
 
-		@invoice.invoice_items.each do |item|
-			@subtotal += item.quantity * item.item_price
+		@invoice.invoice_items.each do |i|
+			@subtotal += i.quantity * i.item_price
+			@tax_total += (i.quantity * i.item_price)*tax unless i.item.exempt_from_tax?
 		end
 
-		@tax_total = @subtotal*tax
-		@total = @subtotal*(1+tax)
+		@total = @subtotal+@tax_total
 
 		@subtotal = ActionController::Base.helpers.number_to_currency(@subtotal)
 		@tax_total = ActionController::Base.helpers.number_to_currency(@tax_total)
