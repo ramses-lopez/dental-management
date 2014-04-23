@@ -34,7 +34,8 @@ class Ability
 		if user.admin?
 			can :manage, :all
 		else
-			can :read, :all
+			can [:deliver, :deliver_stock], Item
+			can :manage, Home
 		end
 
 	end

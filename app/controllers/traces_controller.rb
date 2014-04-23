@@ -1,4 +1,5 @@
 class TracesController < ApplicationController
+	before_action :check_permissions
 	def index
 		@traces = Trace.includes({batch: [:item]}, :user)
 		@traces = @traces.by_user_id(params[:user_id]) unless params[:user_id].blank?

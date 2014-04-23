@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
 	skip_before_action :signed_in_user, only: [:current_stock]
+	before_action :check_permissions, except: [:deliver, :deliver_stock]
 	before_action :set_item, only: [:show, :edit, :update, :destroy]
 
 	# GET /items

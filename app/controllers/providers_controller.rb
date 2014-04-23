@@ -1,4 +1,5 @@
 class ProvidersController < ApplicationController
+	before_action :check_permissions
 	before_action :set_provider, only: [:show, :edit, :update, :destroy]
 
 	# GET /providers

@@ -36,4 +36,8 @@ module SessionsHelper
 	def sign_out
 		reset_session
 	end
+
+	def check_permissions
+		redirect_to root_url, flash: {error: 'No tiene permisos para ver esta página'} unless current_role.admin?
+	end
 end

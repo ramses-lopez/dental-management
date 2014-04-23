@@ -1,4 +1,5 @@
 class InvoicesController < ApplicationController
+	before_action :check_permissions
 	before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
 	# GET /invoices

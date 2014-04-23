@@ -6,10 +6,10 @@ class Role < ActiveRecord::Base
 	end
 
 	def admin?
-		name =~ /\Aadministrador\z/i
+		name == 'administrador'
 	end
 
 	def manager?
-		name =~ /\Amanager\z/i
+		name == 'manager'
 	end
 end
