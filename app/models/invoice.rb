@@ -1,6 +1,8 @@
 class Invoice < ActiveRecord::Base
 	attr_accessor :trace_user
 
+	default_scope {order 'created_at desc'}
+
 	belongs_to :provider
 
 	has_many :invoice_items, dependent: :destroy
