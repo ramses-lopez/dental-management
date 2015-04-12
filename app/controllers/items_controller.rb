@@ -7,8 +7,9 @@ class ItemsController < ApplicationController
 	# GET /items
 	# GET /items.json
 	def index
-		@items = Item.all
+		@items = params[:toggle_active].blank? || params[:toggle_active] == 'false' ? Item.active : Item.all
 		@items = @items.where(id: params[:item_id]) unless params[:item_id].blank?
+		@items = @items.where(active: params[:toggle_active]) unless
 		@items = @items.paginate(page: params[:page])
 	end
 
@@ -59,7 +60,13 @@ class ItemsController < ApplicationController
 	# DELETE /items/1
 	# DELETE /items/1.json
 	def destroy
-		@item.destroy
+
+		if @item.inactivate
+			flash[:success] = "#{Item.model_name.human} desactivado"
+		else
+			flash[:error] = "Error al desactivar #{Item.model_name.human}"
+		end
+
 		respond_to do |format|
 			format.html { redirect_to items_url }
 			format.json { head :no_content }
@@ -153,6 +160,6 @@ class ItemsController < ApplicationController
 
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def item_params
-			params.require(:item).permit(:label, :stock, :minimum_stock, :unit_type_id, :exempt_from_tax)
+			params.require(:item).permit(:label, :stock, :minimum_stock, :unit_type_id, :exempt_from_tax, :active)
 		end
 end

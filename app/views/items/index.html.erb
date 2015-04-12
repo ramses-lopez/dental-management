@@ -2,9 +2,21 @@
 
 <div>
 	<%= form_tag items_path, method: :get do |f| %>
-		<%= select_tag :item_id, grouped_options_for_select(get_grouped_options(Item.all), params[:item_id]), class: 'span4', prompt: t('helpers.select.prompt') %>
+		<div class='row'>
+			<div class="span5">
+				<%= label_tag :item_id, "Buscar materiales" %>
+				<%= select_tag :item_id, grouped_options_for_select(get_grouped_options(Item.all), params[:item_id]), class: 'span4', prompt: t('helpers.select.prompt') %>
+			</div>
+			<div class="span5">
+				<%= label_tag :toggle_active, "Incluir materiales inactivos?" %>
+				<%= check_box_tag :toggle_active, 1, params[:toggle_active] == 'true' %>
+			</div>
+			<div class="span10">
+				<%= button_tag 'Buscar', class: 'btn', name: :search%>
+			</div>
+		</div>
+
 		<br>
-		<%= button_tag 'Buscar', class: 'btn', name: :search%>
 	<% end %>
 </div>
 
@@ -21,8 +33,8 @@
 		</thead>
 		<tbody>
 			<% @items.each do |item| %>
-				<tr class=''>
-					<td><%= link_to item.label, edit_item_path(item) %></td>
+				<tr class='<%= 'error' unless item.active? %>'>
+					<td><%= link_to item.formatted_label, edit_item_path(item) %></td>
 					<td><%= units_to_words(item,item.minimum_stock) %></td>
 					<td class='item-stock'>
 						<%= item_formatted_batches(item)%>

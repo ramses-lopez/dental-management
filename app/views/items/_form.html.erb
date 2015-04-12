@@ -20,6 +20,15 @@
 			<%= f.select :exempt_from_tax, options_for_select([['Si', 1],['No', 0]], @item.exempt_from_tax) %>
 		</div>
 	</div>
+	<div class='row'>
+		<div class="span5">
+			<%= f.label :active %>
+			<%= f.check_box :active %>
+		</div>
+	</div>
+
+	<br/>
+
 	<div class="actions">
 		<%= f.submit %>
 	</div>

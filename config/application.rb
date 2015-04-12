@@ -23,7 +23,7 @@ module DentoSpa
     config.i18n.default_locale = :es
 
     #will_paginate
-    WillPaginate.per_page = 10
+    WillPaginate.per_page = 25
 
   end
 end

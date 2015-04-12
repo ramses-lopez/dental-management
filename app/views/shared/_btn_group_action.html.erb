@@ -6,8 +6,11 @@
 	<ul class="dropdown-menu">
 		<li><%= link_to 'Ver', object %></li>
 		<li><%= link_to 'Modificar', edit_polymorphic_path(object) %></li>
-		<% if object.class == Invoice %>
+		<% if object.class == Invoice  %>
 			<li><%= link_to 'Eliminar', object, method: :delete, data: { confirm: '¿Está seguro?' } %></li>
+		<% end %>
+		<% if object.class == Item  %>
+			<li><%= link_to 'Desactivar', object, method: :delete, data: { confirm: '¿Está seguro?' } %></li>
 		<% end %>
 	</ul>
 </div>
