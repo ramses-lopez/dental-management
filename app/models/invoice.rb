@@ -12,5 +12,13 @@ class Invoice < ActiveRecord::Base
 	accepts_nested_attributes_for :batches, allow_destroy: true
 
 	#TODO: hay que validar que manden al menos un invoice item y por ende un batch
-	validates :provider_id, :number, :date, presence: true
+	validates :provider_id, :date, presence: true
+
+	after_create do
+		if self.number.blank?
+			self.number = self.id
+			self.save
+		end
+	end
+
 end

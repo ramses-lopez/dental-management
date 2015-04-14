@@ -15,11 +15,14 @@
 				<%= button_tag 'Buscar', class: 'btn', name: :search%>
 			</div>
 		</div>
-
-		<br>
 	<% end %>
 </div>
-
+<div class='row'>
+	<div class="span10">
+		<%= render 'shared/form_new', object: Item %>
+	</div>
+</div>
+<br>
 <% if @items.size > 0 %>
 	<table class='table table-condensed table-hover table-bordered'>
 		<thead>
