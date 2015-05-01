@@ -15,7 +15,7 @@ class Batch < ActiveRecord::Base
 	attr_accessor :delta, :type, :trace_comment, :trace_user
 
 	scope :in_stock, -> {includes(:item).where('stock > 0').order("items.label")}
-	scope :under_minimum_stock, -> {joins(:item).includes(:item).where("stock <= minimum_stock and stock >= 0").order("items.label")}
+	scope :under_minimum_stock, -> {joins(:item).includes(:item).where("stock <= minimum_stock and stock >= 0 and items.active = 1").order("items.label")}
 	scope :expiring_soon, ->(days = 30) {where("expiration_date <= current_date + #{days} and stock > 0")}
 
 	with_options presence: :true do |opt|

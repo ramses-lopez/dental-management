@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 	def index
-		#TODO: incluir en navbar un pequeño menú para login
+		@item_number = 25
+		@critical_stock = Batch.under_minimum_stock.limit @item_number
 	end
 end
 

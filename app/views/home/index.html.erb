@@ -1,4 +1,22 @@
-<div class='row' style="height: 300px; padding-top: 20%">
-	<h1>Dento Spa Láser</h1>
-	<h2>Control de Inventario</h2>
-</div>
+<% if @critical_stock.size > 0 %>
+<h3><%= Item.model_name.human.pluralize(:es) %> próximos a agotarse - Top 25 </h3>
+<table class='table table-condensed table-striped table-hover table-bordered'>
+	<thead>
+		<tr>
+			<th>Descripción</th>
+			<th>Existencia mínima</th>
+			<th>Existencia</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @critical_stock.each do |batch| %>
+			<tr class=''>
+				<td><%= batch.label %></td>
+				<td><%= batch.item.minimum_stock %></td>
+				<td><%= batch.stock %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<% end %>
+
