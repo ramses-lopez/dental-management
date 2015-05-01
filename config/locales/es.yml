@@ -220,6 +220,8 @@ es:
         date: Fecha Factura
         total: Total
         tax: Impuesto
+      invoice_items:
+        item_id: Material
       invoice_item:
         item_id: Material
         quantity: Cantidad
