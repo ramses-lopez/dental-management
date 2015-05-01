@@ -9,6 +9,10 @@ class InvoiceItem < ActiveRecord::Base
 	after_create { create_batch }
 	after_update { update_batch }
 
+	with_options presence: :true do |opt|
+		opt.validates :item_id
+	end
+
 	before_destroy do
 		batch = self.batch
 

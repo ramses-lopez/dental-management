@@ -1,5 +1,4 @@
 totalize_invoice = ->
-
 	subtotal = 0
 	tax = 0.12
 
@@ -14,8 +13,6 @@ totalize_invoice = ->
 	$('#tax').text(subtotal * tax)
 	$('#total').text(subtotal * (1+tax))
 
-$(document).on 'change', '.quantity', ->
-	totalize_invoice()
+$(document).on 'change', '.quantity, .item_price', ->
+	#totalize_invoice()
 
-$(document).on 'change', '.item_price', ->
-	totalize_invoice()
