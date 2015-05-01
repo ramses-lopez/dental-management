@@ -19,6 +19,10 @@
 		<b><%= Provider.human_attribute_name(:address) %></b>
 		<%= @provider.address %>
 	</div>
+	<div class='span4'>
+		<b><%= Provider.human_attribute_name(:active) %></b>
+		<%= @provider.active == 1 ? 'Sí' : 'No' %>
+	</div>
 </div>
 <br>
 

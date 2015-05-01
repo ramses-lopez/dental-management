@@ -241,6 +241,7 @@ es:
         email: Correo Electrónico
         website: Página Web
         address: Dirección
+        active: Activo?
       user:
         name: Nombre
         role: Rol

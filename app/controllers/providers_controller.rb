@@ -29,7 +29,7 @@ class ProvidersController < ApplicationController
 
 		respond_to do |format|
 			if @provider.save
-				format.html { redirect_to @provider, notice: 'Provider was successfully created.' }
+				format.html { redirect_to @provider, notice: 'Proveedor creado.' }
 				format.json { render action: 'show', status: :created, location: @provider }
 			else
 				format.html { render action: 'new' }
@@ -43,7 +43,7 @@ class ProvidersController < ApplicationController
 	def update
 		respond_to do |format|
 			if @provider.update(provider_params)
-				format.html { redirect_to @provider, notice: 'Provider was successfully updated.' }
+				format.html { redirect_to @provider, notice: 'Proveedor actualizado.' }
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
@@ -70,7 +70,7 @@ class ProvidersController < ApplicationController
 
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def provider_params
-			params.require(:provider).permit(:label, :phone, :email, :website, :address)
+			params.require(:provider).permit(:label, :phone, :email, :website, :address, :active)
 		end
 end
 

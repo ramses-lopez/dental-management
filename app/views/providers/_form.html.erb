@@ -17,6 +17,10 @@
 			<%= f.label :website %>
 			<%= f.text_field :website %>
 		</div>
+		<div class='span5'>
+			<%= f.label :active %>
+			<%= f.check_box :active %>
+		</div>
 	</div>
 	<div class="row text-center">
 		<%= f.submit t('text.save') + ' ' + Provider.model_name.human, class: 'btn btn-large' %>
